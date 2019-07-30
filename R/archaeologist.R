@@ -76,10 +76,12 @@ binding <-
 ## plot a comparison of all sources
 
 ggplot() +
-  geom_sf(data = countries, aes(), fill = '#696969', colour = '#ffffff') +
+  geom_sf(data = countries, aes(), fill = '#696969', colour = '#ffffff', size = 0.5) +
   geom_point(data = binding, aes(X, Y), colour = 'black', alpha = 0.5) +
+  scale_size_continuous(range = c(0.5, 5))
   facet_wrap(~ set, nrow = 1) +
-  theme_map()
+  theme_map() +
+  ggsave("comparison.png", height = 3, width = 10, dpi = 300)
 
 ## Transform from wide to long format
 
