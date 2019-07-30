@@ -1,4 +1,4 @@
-## Tools
+## Start with spatial tools
 
 library(rnaturalearth)
 library(sf)
@@ -116,12 +116,14 @@ animate <-
   geom_sf(data = countries,
           aes(),
           fill = '#696969', colour = '#FFFFFF', size = 0.1) +
-  geom_point(aes(x = X, y = Y, size = population, colour = year), alpha = 0.5,
-             show.legend = FALSE) +
+  geom_point(aes(x = X, y = Y, size = population, colour = year), alpha = 0.5) +
   coord_sf(datum = 54030) + 
-  scale_size_continuous(range = c(1, 50)) +
+  scale_size_continuous(range = c(1, 50),
+                        guide = FALSE) +
   scale_colour_gradient2(low = '#8e0152', mid = '#f7f7f7', high = '#276419',
-                         midpoint = 0) +
+                         midpoint = 0,
+                         breaks = c(-1000, 0, 1000),
+                         guide = guide_continuous) +
   labs(title = "{round(frame_time, 0)}", subtitle = "MILLENNIA URBANA") +
   transition_time(year) +
   ease_aes('linear') + 
@@ -249,6 +251,7 @@ lay <- rbind(c(1, 1, 1, 2, 2, 2),
 agg <- grobTree(rectGrob(gp = gpar(fill = 'transparent', lwd = 0)), 
                 grid.arrange(grobs = plots, layout_matrix = lay))
 
-ggsave(agg, filename = "aggregate.png", height = 8, width = 8, dpi = 300)
+getwd()
+setwd("/Users/andrewrenninger/Desktop/R/git/tinkering/viz")
 
-
+ggsave(agg, filename = "aggregate.png", height = 10, width = 10, dpi = 300)

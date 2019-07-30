@@ -99,7 +99,10 @@ theme_map <- function () {
           plot.subtitle =  element_text(face = 'plain', colour = 'black', size = 15),
           plot.caption = element_text(face = 'bold', colour = 'black'),
           strip.text = element_text(face = 'bold', colour = 'black'),
-          plot.margin = margin(20, 20, 20, 20)
+          plot.margin = margin(20, 20, 20, 20),
+          legend.position = c(0.1, 0.3),
+          legend.title = element_text(face = 'bold', angle = 90),
+          legend.text = element_text(angle = 90)
     )
   
 }
