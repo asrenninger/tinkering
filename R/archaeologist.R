@@ -76,9 +76,9 @@ binding <-
 ## plot a comparison of all sources
 
 ggplot() +
-  geom_sf(data = countries, aes(), fill = '#696969', colour = '#ffffff', size = 0.5) +
+  geom_sf(data = countries, aes(), fill = '#696969', colour = '#ffffff', size = 0.1) +
   geom_point(data = binding, aes(X, Y), colour = 'black', alpha = 0.5) +
-  scale_size_continuous(range = c(0.5, 5))
+  scale_size_continuous(range = c(0.1, 3)) +
   facet_wrap(~ set, nrow = 1) +
   theme_map() +
   ggsave("comparison.png", height = 3, width = 10, dpi = 300)
@@ -215,7 +215,7 @@ for (i in 1:nrow(centroids)) {
                  fill = '#696969', colour = '#FFFFFF', size = 0.1) +
     geom_point(data = cities_shaped, 
                aes(x = X, y = Y, size = population, colour = year), show.legend = FALSE) +
-    scale_size_continuous(range = c(1, 10)) +
+    scale_size_continuous(range = c(0.5, 5)) +
     scale_colour_gradient2(low = '#8e0152', mid = '#f7f7f7', high = '#276419',
                            midpoint = 0) +
     coord_map("ortho", orientation = c(coords$Y[i], coords$X[i], 0)) +
@@ -249,6 +249,6 @@ lay <- rbind(c(1, 1, 1, 2, 2, 2),
 agg <- grobTree(rectGrob(gp = gpar(fill = 'transparent', lwd = 0)), 
                 grid.arrange(grobs = plots, layout_matrix = lay))
 
-ggsave(agg, filename = "aggregate.png", height = 20, width = 20, dpi = 300)
+ggsave(agg, filename = "aggregate.png", height = 8, width = 8, dpi = 300)
 
 
