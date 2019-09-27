@@ -1,5 +1,7 @@
 library(tidyverse)
+library(janitor)
 
+## https://www.census.gov/dataviz/visualizations/007/508.php
 ##
 
 pal <- read_csv("https://github.com/asrenninger/palettes/raw/master/turbo.txt", col_names = FALSE) %>% pull(X1)
@@ -28,7 +30,25 @@ theme_ver <- function () {
 
 ##
 
+messy <- read_csv("https://github.com/asrenninger/tinkering/raw/master/data/cities.csv",
+                  skip = 1)
+
+tidy <- 
+  messy %>%
+  clean_names() %>%
+  select(-x0) %>%
+  mutate(metro_area = str_remove_all(city_and_state, ",.*")) %>%
+  select(metro_area, everything()) %>%
+  gather(year, rank, x1790_rank:x2010_rank) %>%
+  mutate(year = str_remove_all(year, "_rank")) %>%
+  mutate(year = as.numeric(str_remove_all(year, "x"))) %>%
+  filter(rank != 0)
+  
+##
+
 allyears <- read_csv("https://github.com/asrenninger/tinkering/raw/master/data/cities_historiograph.csv")
+
+##
 
 allyears <- 
   allyears %>%
@@ -45,6 +65,22 @@ allyears <-
   right_join(allyears) %>%
   ungroup() %>%
   mutate(metro_area = str_remove_all(metro_area, pattern = ",.*"))
+
+
+allyears <- 
+  tidy %>%
+  group_by(metro_area) %>%
+  filter(year == min(year)) %>%
+  rename(first = rank,
+         started = year) %>%
+  select(metro_area, first, started) %>%
+  right_join(tidy) %>%
+  filter(year == max(year)) %>%
+  rename(final = rank,
+         finished = year) %>%
+  select(metro_area, first, final, started, finished) %>%
+  right_join(tidy) %>%
+  ungroup()
 
 ##
 
@@ -63,9 +99,11 @@ ggplot() +
               filter(year == min(year)),
             aes(x = year, y = rank, colour = final, label = metro_area),
             fontface = 'bold', hjust = 1) +
-  scale_colour_gradientn(colours = pal) +
+  scale_colour_gradientn(colours = pal,
+                         guide = 'none') +
   xlim(1780, 2020) +
   ylim(0, 20) + 
+  scale_y_reverse() +
   theme_ver()
 
 ##
@@ -96,11 +134,13 @@ animation <-
   transition_reveal(year) + 
   coord_cartesian(clip = 'off') + 
   ggtitle(label = "{round({frame_along}, 0)}", subtitle = "RANKED SIZE") + 
+  labs(caption = "names are positioned at the decades wherein that city joins or leaves the rankings") +
   ylab("") +
   xlim(1760, 2040) +
   ylim(0, 20) + 
   scale_colour_gradientn(colours = rev(pal), 
                          guide = 'none') +
+  scale_y_reverse() +
   theme_ver()
 
 ##
@@ -109,3 +149,12 @@ animate(animation, fps = 5, start_pause = 5, end_pause = 20,
         height = 500, width = 900)
 
 anim_save(filename = "race.gif", path = "viz")
+
+##
+
+allyears %>%
+  filter(year == 1790)
+
+allyears %>%
+  filter(metro_area == "Southwark")
+
