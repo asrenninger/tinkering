@@ -408,7 +408,10 @@ coordinated %>%
   scale_fill_gradientn(colours = rev(fun(9)),
                        name = "count",
                        guide = guide_continuous) +
-  theme_map()
+  labs(title = "correlation 0.76 | p < 0.05",
+       subtitle = "temperature and built index") + 
+  theme_map() +
+  ggsave("correlation.png", height = 6, width = 8, dpi = 300)
 
 ##
 
