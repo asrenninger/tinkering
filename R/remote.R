@@ -266,6 +266,34 @@ ggplot() +
 
 ##
 
+ggplot() +
+  geom_sf(data = background,
+          aes(),
+          fill = 'grey90', size = 0, colour = NA) +
+  geom_point(data = coordinated %>%
+               mutate(percentile = ntile(layer, 100)) %>%
+               filter(percentile > 95),
+             aes(x = X, y = Y, colour = layer),
+             size = 0.5) +
+  geom_sf(data = water,
+          aes(), fill = 'white', 
+          colour = NA, size = 0) +
+#  geom_text(data = labels %>%
+#              filter(str_detect(listname, "Grays Ferry|Cobbs Creek|Upper Kensington")),
+#            aes(x = X, y = Y, label = listname),
+#            colour = 'grey30', fontface = 'bold', alpha = 0.75, size = 5) +
+  scale_colour_gradientn(colours = rev(fun(9)),
+                         name = "temperature (fahrenheit)",
+                   #      breaks = c(72, 86, 100), 
+                         guide = guide_continuous) +
+  labs(title = "20 july 2019",
+       subtitle = "hot spots",
+       caption = "source: USGS, processing by author") +
+  theme_map() +
+  ggsave("temperature.png", height = 8, width = 6, dpi = 300)
+
+##
+
 min(coordinated$layer)
 max(coordinated$layer)
 median(coordinated$layer)
@@ -427,6 +455,30 @@ correlating <-
 
 cor.test(correlating$temperature, correlating$built)
 
+##
 
+plot(philadelphia)
 
+##
 
+vectorised <- getValues(clipped)
+
+str(vectorised)
+
+##
+
+kmncluster <- kmeans(na.omit(vectorised), centers = 10, iter.max = 500, nstart = 5, algorithm="Lloyd")
+
+##
+
+rasterImage(vectorised)
+
+##
+
+knr <- setValues(kmncluster$cluster)
+
+##
+
+colours <- c("#fef65b","#ff0000", "#daa520","#0000ff","#0000ff","#00ff00","#cbbeb5", "#c3ff5b", "#ff7373", "#00ff00", "#808080")
+
+##

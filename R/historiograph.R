@@ -150,11 +150,3 @@ animate(animation, fps = 5, start_pause = 5, end_pause = 20,
 
 anim_save(filename = "race.gif", path = "viz")
 
-##
-
-allyears %>%
-  filter(year == 1790)
-
-allyears %>%
-  filter(metro_area == "Southwark")
-

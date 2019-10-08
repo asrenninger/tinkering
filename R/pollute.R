@@ -10,25 +10,27 @@ ggplot(test %>%
   geom_point(aes(colour = pm102001), size = 0.01) +
   scale_colour_viridis()
 
-read_csv("~/Downloads/mapno22017.csv", skip = 5) %>%
+read_csv("~/Desktop/R/git/tinkering/data/mapno22017.csv", skip = 5) %>%
   set_names(c("code", "x", "y", "variable")) %>%
   filter(variable != "MISSING") %>%
   mutate(variable = as.numeric(variable)) %>%
   ggplot(aes(x, y)) +
   geom_point(aes(colour = variable), size = 0.01) +
   scale_colour_viridis()
-  
-"https://uk-air.defra.gov.uk/datastore/pcm/mapno22016.csv"
-"https://uk-air.defra.gov.uk/datastore/pcm/mapno22017.csv"
+
+test %>%
+  filter(year == 2015) %>%
+  set_names(c("code", "x", "y", "variable", "year")) %>%
+  mutate(variable = as.numeric(variable)) %>%
+  ggplot(aes(x, y)) +
+  geom_point(aes(colour = variable), size = 0.01) +
+  scale_colour_viridis()
 
 ## 
 
 library(glue)
 
 ##
-
-glue("~/Downloads/mapno22016.csv") %>%
-  read_csv(skip = 5) 
 
 test <- 
   reduce(
@@ -45,12 +47,14 @@ test <-
 test %>% pull(year) %>% unique()
 
 p <-
-  ggplot(test, 
+  ggplot(test %>%
+           filter(year == 2016), 
          aes(x = X, y = Y)) + 
   geom_point(aes(color = NO2), size = 0.1) +
   scale_fill_viridis() +
   theme_map()
 
+p
 
 ##
 
