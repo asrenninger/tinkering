@@ -150,3 +150,24 @@ animate(animation, fps = 5, start_pause = 5, end_pause = 20,
 
 anim_save(filename = "race.gif", path = "viz")
 
+##
+
+read_csv("data/urbanism.csv", skip = 1) %>%
+  clean_names() %>%
+  select(-x1) %>%
+  gather(year, urbanisation, x2010:x1790) %>%
+  mutate(state_territory = str_remove_all(state_territory, "\\[.*\\]"),
+         year = as.numeric(str_remove_all(year, "x")),
+         urbanisation = as.numeric(str_remove_all(urbanisation, "%"))) %>%
+  ggplot(aes(year, urbanisation)) +
+  geom_line(data = . %>% filter(state_territory != "United States"),
+            aes(group = state_territory),
+            colour = 'grey40', alpha = 0.25, size = 0.5) +
+  geom_line(data = . %>% filter(state_territory == "United States"),
+            colour = pal[9], size = 2) +
+  labs(title = "states behind the national average",
+       subtitle = "PROPORTION URBAN",
+       caption = "") +
+  theme_hor() +
+  ggsave("urbanisation.png", height = 5, width = 6, dpi = 300)
+  
