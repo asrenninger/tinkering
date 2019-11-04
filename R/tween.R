@@ -1,6 +1,8 @@
 ##
 
 library(tigris)
+library(tidyverse)
+library(sf)
 
 ##
 
@@ -15,11 +17,6 @@ roads <-
     }), 
     rbind
   )
-
-##
-
-library(tidyverse)
-library(sf)
 
 ##
 
