@@ -1,6 +1,7 @@
-
 library(tidyverse)
 library(sf)
+
+##
 
 counties <- st_read("https://github.com/asrenninger/twentysixteen/raw/master/data-out/counties.geojson",
                     crs = 102003)
@@ -9,6 +10,10 @@ counties <- st_read("https://github.com/asrenninger/twentysixteen/raw/master/dat
 
 crosswalk <- read_csv("https://github.com/asrenninger/twentysixteen/raw/master/data-out/crosswalk.csv")
 elections <- read_csv("https://github.com/asrenninger/twentysixteen/raw/master/data-out/votes.csv")
+
+elections %>%
+  filter(county == "Los Angeles") %>%
+  select(year, county, margin)
 
 ##
 

@@ -62,7 +62,7 @@ points <-
 
 ##
 
-transformed<- st_transform(points, st_crs(tracts))
+transformed <- st_transform(points, st_crs(tracts))
 
 ##
 

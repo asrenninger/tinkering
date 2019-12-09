@@ -408,7 +408,7 @@ cem <- reclassify(ndbi, matrix(rbind(cbind(-Inf, -0.2, NA), cbind(1, Inf, NA)), 
 wat <- reclassify(ndwi, matrix(rbind(cbind(-Inf, 0, NA), cbind(1, Inf, NA)), ncol = 3))
 
 plot(veg, main = 'possible vegetation')
-plot(cem, main = 'possible payment')
+plot(cem, main = 'possible pavement')
 plot(wat, main = 'possible water')
 
 ##
