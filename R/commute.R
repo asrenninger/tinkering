@@ -1,4 +1,4 @@
-library(tidyverse)
+
 library(geofacet)
 
 ##
@@ -12,14 +12,21 @@ library(lehdr)
 ##
 
 ordest <- grab_lodes(state = states, year = 2015, lodes_type = "od", job_type = "JT01", 
-                     segment = "S000", state_part = "main", agg_geo = "tract")   
-
-write_csv(ordest, "lodes_data.csv")
-ordest <- read_csv("data/lodes_data.csv")
+                     segment = "S000", state_part = "aux", agg_geo = "tract")   
 
 ##
 
-glimpse(ordest)
+library(tidyverse)
+
+##
+
+write_csv(ordest, "lodes_data_aux.csv")
+
+ordest <- read_csv("data/lodes_data_aux.csv")
+
+##
+
+head(ordest)
 
 ##
 
@@ -44,13 +51,19 @@ tracts <-
   select(GEOID10, X, Y)
 
 ordest %>%
-  filter(state == "PA") %>%
+  filter(state != "AK" & state != "HI") %>%
+  group_by(state) %>%
+  add_tally() %>%
+  sample_n(n / 10) %>%
+  ungroup() %>%
   group_by(id) %>%
   gather(location, GEOID10, h_tract:w_tract) %>%
   left_join(tracts) %>%
-  st_as_sf(coords = c("X", "Y")) %>%
+  st_as_sf(coords = c("X", "Y"), crs = 4326) %>%
+  st_transform(102003) %>%
   summarise(jobs = mean(`S000`)) %>%
+  st_cast("MULTIPOINT") %>%
   st_cast("LINESTRING") %>%
   mutate(length = st_length(geometry)) %>%
-  st_write("lodes_shape.shp")
+  st_write("lodes_shape_7.shp")
 
