@@ -99,10 +99,6 @@ trading_data <-
 
 ##
 
-library(lubridate)
-
-##
-
 trading_series <-
   trading_data %>%
   mutate(date_round = floor_date(date, "month")) %>%
@@ -133,80 +129,16 @@ library(geofacet)
 
 ##
 
-trading_series %>%
-  group_by(ticker) %>%
-  add_tally() %>%
-  ungroup() %>%
-  filter(n == 30) %>%
-  filter(!str_detect(ticker, "YRCW|ABEO")) %>%
-  arrange(desc(close)) %>%
-  distinct(ticker)
-
-ggplot() +
-  geom_line(data = 
-              trading_series %>%
-              group_by(ticker) %>%
-              add_tally() %>%
-              ungroup() %>%
-              filter(n == 30) %>%
-              group_by(ticker) %>%
-              mutate(height = max(close)) %>%
-              filter(height < 1500) %>%
-              mutate(z_score = scale(close)),
-            aes(date_round, z_score, group = ticker)) +
-  geom_line(data = trading_series %>%
-              group_by(ticker) %>%
-              add_tally() %>%
-              ungroup() %>%
-              filter(n == 30) %>%
-              group_by(ticker) %>%
-              mutate(height = max(close)) %>%
-              filter(height < 1500) %>%
-              mutate(z_score = scale(close)) %>%
-              filter(ticker == "AAPL"),
-            aes(date_round, z_score, group = ticker), colour = '#183713')
-
 ggplot(trading_series %>%
-         group_by(ticker) %>%
-         add_tally() %>%
-         ungroup() %>%
-         filter(n == 30) %>%
-         group_by(ticker) %>%
-         mutate(height = max(close)) %>%
-         filter(height < 1500) %>%
-         mutate(z_score = scale(close))%>%
+         filter(date_round > as_date("2009-01-01")) %>%
          left_join(select(geodata, ticker, REGION, NAME)) %>%
          drop_na(NAME) %>%
          group_by(NAME, date_round) %>%
-         summarise(avg = mean(z_score)),
+         summarise(avg = mean(close),
+                   dif = var(close)),
        aes(date_round, avg)) +
   geom_line() +
-  facet_geo(~ NAME) +
-  theme_hor() +
-  ggsave("statebystate.png", height = 8, width = 11, dpi = 300)
-
-ggplot(trading_series %>%
-         group_by(ticker) %>%
-         add_tally() %>%
-         ungroup() %>%
-         filter(n == 30) %>%
-         group_by(ticker) %>%
-         mutate(height = max(close)) %>%
-         filter(height < 1500) %>%
-         mutate(z_score = scale(close))%>%
-         ungroup() %>%
-         left_join(select(geodata, ticker, REGION, NAME)),
-       aes(date_round, z_score)) +
-  geom_line() +
-  facet_geo(~ NAME) +
-  theme_hor()
-  ggsave("statebystate.png", height = 8, width = 11, dpi = 300)
+  geom_ribbon(aes(ymax = avg + dif / 2, ymin = avg - dif / 2)) +
+  facet_geo(~ NAME, scales = 'free')
 
 ##
-
-plot(states)
-
-##
-
-
-
