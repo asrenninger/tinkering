@@ -272,7 +272,7 @@ map <- tm_shape(proj_states) +
   tm_shape(proj_cities %>%
              rename(`budget shortfall (%)` = severe)) +
   tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), scale = 4, border.col = '#cfcfcf') +
-  tm_layout(main.title = "FISCAL DISTRESS", 
+  tm_layout(main.title = "LOCAL FISCAL DISTRESS", 
             main.title.fontface = 'bold',
             legend.position = c("right","bottom"),
             legend.bg.color = "white",
@@ -280,5 +280,175 @@ map <- tm_shape(proj_states) +
             legend.height = 0.25,
             frame.lwd = 0)
 
-tmap_save(map, "viz/distress.png", height = 12, width = 16, dpi = 300, units = "in")
- 
+tmap_save(map, "~/Desktop/local.png", height = 12, width = 16, dpi = 300, units = "in")
+
+## 
+
+library(janitor)
+
+##
+
+budgets <- read_csv("~/Desktop/states.csv") %>%
+  clean_names() %>%
+  select(-x1) %>%
+  mutate(fy_2020 = readr::parse_number(fy_2020),
+         fy_2021 = readr::parse_number(fy_2021)) 
+
+##
+
+states <- 
+  proj_states %>%
+  transmute(state = name) %>%
+  left_join(budgets) %>%
+  select(state, fy_2020, fy_2021, geometry) %>%
+  st_as_sf()
+
+##
+
+map <- tm_shape(states %>%
+                  rename(`budget drop (%)` = fy_2021)) +
+  tm_fill(col = "budget drop (%)", border.col = '#ffffff', pal = rev(pal)) +
+  tm_shape(proj_cities %>%
+             rename(`budget shortfall (%)` = severe)) +
+  tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), scale = 4, border.col = '#cfcfcf') +
+  tm_layout(main.title = "FISCAL DISTRESS", 
+            legend.outside = TRUE,
+            main.title.fontface = 'bold',
+            legend.position = c("left","bottom"),
+            legend.bg.color = "white",
+            legend.width = 0.25,
+            legend.height = 0.25,
+            frame.lwd = 0)
+
+tmap_save(map, "~/Desktop/aggregate.png", height = 12, width = 16, dpi = 300, units = "in")
+
+map <- tm_shape(states %>%
+                  rename(`budget drop (%)` = fy_2021)) +
+  tm_fill(col = "budget drop (%)", border.col = '#ffffff', pal = rev(pal)) +
+  tm_layout(main.title = "STATE FISCAL DISTRESS", 
+            #legend.outside = TRUE,
+            main.title.fontface = 'bold',
+            legend.position = c("right","bottom"),
+            legend.bg.color = "white",
+            legend.width = 0.25,
+            legend.height = 0.25,
+            frame.lwd = 0)
+
+tmap_save(map, "~/Desktop/state.png", height = 12, width = 16, dpi = 300, units = "in")
+
+##
+
+map <- tm_shape(states %>%
+                  rename(`budget drop (%)` = fy_2021)) +
+  tm_fill(col = "budget drop (%)", border.col = '#ffffff', pal = rev(pal)) +
+  tm_shape(proj_cities %>%
+             rename(`budget shortfall (%)` = severe)) +
+  tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), scale = 4, border.col = '#cfcfcf') +
+  tm_layout(main.title = "STATE AND LOCAL FISCAL DISTRESS", 
+            legend.show = FALSE, 
+            main.title.fontface = 'bold',
+            main.title.position = c("center", "top"),
+            frame.lwd = 0)
+
+tmap_save(map, "~/Desktop/artistic.png", height = 12, width = 16, dpi = 300, units = "in")
+
+##
+
+datapasta::tribble_paste()
+
+budgets <- tibble::tribble(
+  ~x, ~state, ~debt, ~joblessness, ~rainday, ~shortfall, ~rating, ~yield, ~comment, 
+  1,           "Idaho", 2.8, 5.6, 11.5, -20.3, "Aa1*.(S)./.AA+.(S)", 11,                                "Strong financial position, revenue growth of 8% in fiscal year 2020",
+  2L,        "Wyoming",       3,     7.6,     96.6,     -28.5,              "AA (S)",    0L,                                                   "Largest rainy day fund as % of government revenue",
+  3L,   "South Dakota",     1.5,     7.2,     10.4,     -10.2,  "Aaa* (S) / AAA (S)",   13L,                       "Good reserves and strong budget management including fiscal-year 2020 surplus",
+  4L,           "Utah",     2.3,     5.1,      9.2,     -10.3,   "Aaa (S) / AAA (S)",    5L,                                                         "Strong historical job and population growth",
+  5L,       "Nebraska",     0.7,     6.7,      7.6,     -12.6,   "Aa1 (S) / AAA (S)",   49L,                                "Lowest overall debt as % of GDP paired with solid financial position",
+  6L,   "North Dakota",     2.3,     6.1,      5.4,     -35.9,  "Aa1* (S) / AA+ (S)",   28L,                                 "Strong reserves, energy dependence could lead to prolonged recovery",
+  7L,      "Tennessee",     2.1,     9.7,      6.1,     -10.8,   "Aaa (S) / AAA (S)",   -2L,                                                               "Good operations, well-funded pensions",
+  8L,           "Iowa",       2,       8,     10.1,     -11.4,  "Aaa* (S) / AAA (S)",   22L,                                                                                "Very low debt burden",
+  9L,       "Virginia",     5.1,     8.4,      3.7,       -13,   "Aaa (S) / AAA (S)",   -4L,                                 "Resilient economy bolstered by second-largest federal employee base",
+  10L,      "Minnesota",     4.7,     8.6,     10.5,      -9.6,   "Aa1 (S) / AAA (N)",    7L,                                               "Heading into recession with healthy financial metrics",
+  11L,     "Washington",     5.7,     9.8,      7.1,     -13.6,   "Aaa (S) / AA+ (S)",   11L,            "Above-average debt, but well-funded pensions, strong demographics, and diverse employers",
+  12L,        "Georgia",     6.9,     7.6,       11,       -10,   "Aaa (S) / AAA (S)",    3L,                                                      "Proactive budget management and solid reserves",
+  13L, "North Carolina",     7.3,     7.6,      5.3,     -10.1,   "Aaa (S) / AAA (S)",   -8L,                                              "Growing economy prerecession with well-funded pensions",
+  14L,        "Indiana",     4.1,    11.2,      8.8,       -16,  "Aaa* (S) / AAA (S)",   22L,                                                                                          "No GO debt",
+  15L,          "Texas",     9.5,     8.6,     21.1,     -14.7,   "Aaa (S) / AAA (S)",   23L,                                         "No. 1 in population and job growth in 2019; stable finances",
+  16L,        "Florida",     3.8,    10.4,      4.5,     -18.8,   "Aaa (S) / AAA (S)",   -2L,                                                             "Heavy reliance on sales-tax performance",
+  17L,         "Oregon",     6.2,    11.2,     12.7,      -8.1,   "Aa1 (S) / AA+ (S)",    3L,                                     "Improved reserves will help offset revenue losses; debt is high",
+  18L,       "Delaware",    18.9,    12.5,      5.5,     -10.6,   "Aaa (S) / AAA (S)",   -3L,                                           "Good reserves though highly levered by tax-supported debt",
+  19L,       "Arkansas",     6.7,       8,      2.7,     -11.3,    "Aa1 (S) / AA (S)",    5L,                                                                                "Low debt, low wealth",
+  20L,  "New Hampshire",     4.9,    11.8,      7.7,      -9.5,    "Aa1 (S) / AA (S)",    2L,                                   "Good economy, large federal stimulus compared with size of budget",
+  21L,      "Wisconsin",     4.4,     8.5,      3.6,      -9.9,    "Aa1 (S) / AA (S)",   -2L,                       "Among strongest pensions in country, reserves at highest point in two decades",
+  22L,       "Oklahoma",     3.2,     6.6,     11.5,     -22.2,   "Aa2* (S) / AA (N)",   52L,                                                     "Positive financial trends reversed by oil crash",
+  23L,        "Montana",     7.2,     7.1,      2.5,     -15.4,    "Aa1 (S) / AA (S)",    4L,                                                                          "Good reserves and low debt",
+  24L, "South Carolina",    10.5,     8.7,      6.5,       -16,   "Aaa (S) / AA+ (S)",    7L,                                                        "Strong reserves through poor pension funding",
+  25L,       "Missouri",     4.6,     7.9,      6.8,     -22.5,   "Aaa (S) / AAA (S)",    3L,                                           "FY21 budget includes $4 billion in unapproved federal aid",
+  26L,       "Colorado",     3.5,    10.5,      8.9,     -11.5,   "Aa1* (S) / AA (S)",   21L,        "Conservative budgeting, recent population growth, good GDP growth heading into the recession",
+  27L,       "Maryland",    15.2,       8,      4.9,      -7.6,   "Aaa (S) / AAA (S)",    5L,                                              "Low reserves and strong economy heading into recession",
+  28L,  "Massachusetts",      19,    17.4,     10.4,      -7.7,    "Aa1 (S) / AA (S)",    6L, "High debt and highest current jobless rate, but improved reserves and a historically strong economy",
+  29L,           "Ohio",     5.9,    10.9,        8,      -8.7,   "Aa1 (S) / AA+ (S)",    9L,                             "Strong budgetary practices, above-average unemployment even prepandemic",
+  30L,     "California",    10.7,    14.9,       15,     -14.9,   "Aa2 (S) / AA- (S)",    1L,                           "Much stronger financial position heading into this recession than in 2009",
+  31L,       "New York",     7.9,    15.7,      2.8,     -25.5,   "Aa1 (N) / AA+ (S)",   -1L,                        "Estimated budget gap is large and continues to escalate, manageable pensions",
+  32L,       "Michigan",     9.7,    14.8,       11,     -18.6,    "Aa1 (S) / AA (N)",   14L,                          "Volatile economy during downturns, supported by recent buildup in reserves",
+  33L,        "Alabama",      11,     7.5,      9.8,      -8.3,    "Aa1 (S) / AA (S)",   28L,                                                         "Good fund balances, large pension liability",
+  34L,         "Alaska",      17,    12.4,     46.8,     -65.9,   "Aa3 (N) / AA- (N)",   13L,                                                                 "Economy driven by natural resources",
+  35L,          "Maine",    11.6,     6.6,      8.3,     -19.7,    "Aa2 (S) / AA (S)",   10L,                                              "Adequate finances, lagging behind prerecession economy",
+  36L,        "Vermont",    19.4,     9.4,       14,     -14.1,   "Aa1 (S) / AA+ (S)",   -6L,                         "High unfunded pension and health-care liabilities, strong budget management",
+  37L,     "New Mexico",    11.1,     8.3,     14.5,     -11.2,    "Aa2 (S) / AA (N)",    2L,                         "Economic concentration in oil-and-gas industries, strong financial reserves",
+  38L,        "Arizona",     2.9,      10,      4.4,     -13.5,   "Aa1* (S) / AA (S)",   -3L,                                                            "Struggling operations with weak reserves",
+  39L,         "Nevada",     4.2,      15,      6.9,     -13.4,   "Aa1 (N) / AA+ (N)",    7L,                                        "Employment is highly concentrated in leisure and hospitality",
+  40L,         "Hawaii",    26.8,    13.9,      4.8,     -12.2,   "Aa2 (S) / AA+ (N)",   24L,                      "Tourism-based economy as leisure-and-hospitality account for 19% of employment",
+  41L,         "Kansas",    10.1,     7.5,        0,     -17.3,  "Aa2* (S) / AA- (S)",   41L,                               "Positive financial trends following years of declines due to tax cuts",
+  42L,    "Mississippi",     9.9,     8.7,      6.3,     -14.5,    "Aa2 (S) / AA (S)",   12L,                                                                  "Low wealth, poorly funded pensions",
+  43L,  "West Virginia",    14.1,    10.4,     16.4,     -28.2,   "Aa2 (S) / AA- (S)",    2L,                                       "Weak economy and high unemployment pressured by elevated debt",
+  44L,      "Louisiana",    10.6,     9.7,      4.1,     -36.4,   "Aa3 (S) / AA- (S)",   20L,                                  "Weak economy; however, strong budget performance prior to pandemic",
+  45L,    "Connecticut",      33,     9.8,       13,       -12,      "A1 (S) / A (S)",   47L,                  "The state with the highest overall debt burden on a per capita and a per GDP basis",
+  46L,   "Rhode Island",    11.7,    12.4,      5.2,     -12.5,    "Aa2 (S) / AA (S)",   11L,                                          "Very low reserves accompanied by large pension obligations",
+  47L,   "Pennsylvania",    12.4,      13,      0.1,      -5.6,    "Aa3 (S) / A+ (S)",   36L,                                          "Weak reserves and sensitive economy with high unemployment",
+  48L,       "Kentucky",    22.4,     4.3,      1.1,     -15.6,    "Aa3* (S) / A (S)",   72L,                                                                    "Large and poorly funded pensions",
+  49L,     "New Jersey",      31,    16.6,      1.1,     -25.4,     "A3 (N) / A- (N)",   74L,                                                "Could borrow over $4 billion to plug budget deficits",
+  50L,       "Illinois",    30.3,    14.6,        0,     -13.1, "Baa3 (N) / BBB- (N)",  223L,                              "The only state that has borrowed from the Municipal Liquidity Facility"
+)
+
+##
+
+states <- 
+  proj_states %>%
+  transmute(state = name) %>%
+  left_join(budgets) %>%
+  select(state, shortfall, geometry) %>%
+  st_as_sf()
+
+## 
+
+map <- tm_shape(states %>%
+                  rename(`budget shortfall (%)` = shortfall)) +
+  tm_fill(col = "budget shortfall (%)", border.col = '#ffffff', pal = pal, style = 'jenks') +
+  tm_shape(proj_cities %>%
+             rename(`budget shortfall (%)` = severe)) +
+  tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), scale = 4, border.col = '#cfcfcf') +
+  tm_layout(main.title = "FISCAL DISTRESS", 
+            legend.outside = TRUE,
+            main.title.fontface = 'bold',
+            legend.position = c("left","bottom"),
+            legend.bg.color = "white",
+            legend.width = 0.25,
+            legend.height = 0.25,
+            frame.lwd = 0)
+
+tmap_save(map, "~/Desktop/aggregate.png", height = 12, width = 16, dpi = 300, units = "in")
+
+map <- tm_shape(states %>%
+                  rename(`budget shortfall (%)` = shortfall)) +
+  tm_fill(col = "budget shortfall (%)", border.col = '#ffffff', pal = pal, style = 'jenks') +
+  tm_layout(main.title = "STATE FISCAL DISTRESS", 
+            #legend.outside = TRUE,
+            main.title.fontface = 'bold',
+            legend.position = c("right","bottom"),
+            legend.bg.color = "white",
+            legend.width = 0.25,
+            legend.height = 0.25,
+            frame.lwd = 0)
+
+tmap_save(map, "~/Desktop/state.png", height = 12, width = 16, dpi = 300, units = "in")
+
