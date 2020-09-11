@@ -208,10 +208,10 @@ tro <-
 target <- 
   bind_rows(uno, dos, tre, tro) %>%
   mutate(mild = str_remove(mild, "%"),
-         severe = str_remove(mild, "%")) %>%
+         severe = str_remove(severe, "%")) %>%
   mutate(mild = as.numeric(mild),
          severe = as.numeric(severe)) %>%
-  write_csv("shortfalls.csv")
+  write_csv("~/Desktop/shortfalls.csv")
 
 ##
 
@@ -416,18 +416,41 @@ states <-
   proj_states %>%
   transmute(state = name) %>%
   left_join(budgets) %>%
-  select(state, shortfall, geometry) %>%
+  select(state, shortfall, x, geometry) %>%
   st_as_sf()
 
 ## 
 
+pal <- read_csv("https://raw.githubusercontent.com/asrenninger/palettes/master/redblu.txt", col_names = FALSE) %>% pull(X1)
+
+regions <- read_csv("https://raw.githubusercontent.com/cphalpert/census-regions/master/us%20census%20bureau%20regions%20and%20divisions.csv") %>% 
+  clean_names() %>%
+  transmute(abbrev = state_code,
+            region = region,
+            division = division)
+
+abbrevs <- 
+  tigris::fips_codes %>% distinct(state, .keep_all = TRUE) %>%
+  transmute(abbrev = state,
+            state = state_name)
+
 map <- tm_shape(states %>%
-                  rename(`budget shortfall (%)` = shortfall)) +
-  tm_fill(col = "budget shortfall (%)", border.col = '#ffffff', pal = pal, style = 'jenks') +
+                  rename(`budget shortfall (%)` = shortfall,
+                         `creditworthiness (rank)` = x) %>%
+                  left_join(abbrevs) %>%
+                  left_join(regions)) +
+  tm_fill(col = "creditworthiness (rank)", border.col = '#ffffff', pal = rev(pal)) +
+  #tm_text(text = "abbrev") +
+  tm_borders(col="#ffffff", lwd = 2 , lty = 1) +
   tm_shape(proj_cities %>%
-             rename(`budget shortfall (%)` = severe)) +
-  tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), scale = 4, border.col = '#cfcfcf') +
-  tm_layout(main.title = "FISCAL DISTRESS", 
+             select(-mild, -severe) %>% 
+             left_join(target) %>%
+             st_as_sf() %>%
+             mutate(`budget shortfall (%)` = severe)) +
+  tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), breaks = c(0, 5, 10, 15, 20), scale = 4,border.col = '#cfcfcf') +
+  #tm_text(text = "city") + 
+  tm_credits("Source: state data from Norton and Kleege; local data from Chernick Copeland and Reschovsky.") +
+  tm_layout(main.title = "2021 STATE AND LOCAL FISCAL DISTRESS", 
             legend.outside = TRUE,
             main.title.fontface = 'bold',
             legend.position = c("left","bottom"),
@@ -437,6 +460,82 @@ map <- tm_shape(states %>%
             frame.lwd = 0)
 
 tmap_save(map, "~/Desktop/aggregate.png", height = 12, width = 16, dpi = 300, units = "in")
+
+state_info <- 
+  states %>%
+  rename(`budget shortfall (%)` = shortfall,
+         `creditworthiness (rank)` = x) %>%
+  left_join(abbrevs) %>%
+  left_join(regions)
+
+city_info <- 
+  proj_cities %>%
+  select(-mild, -severe) %>% 
+  left_join(target) %>%
+  rename(abbrev = state) %>%
+  left_join(regions) %>%
+  st_as_sf() %>%
+  mutate(`budget shortfall (%)` = severe)
+
+st_crs(city_info)
+st_crs(state_info)
+
+map <- tm_shape(state_info %>%
+                  filter(!str_detect(abbrev, "AK|HI"))) +
+  tm_fill(col = "creditworthiness (rank)", border.col = '#ffffff', breaks = c(0, 10, 20, 30, 40, 50), pal = rev(pal)) +
+  tm_text(text = "abbrev", fontface = 'bold') +
+  tm_borders(col="#ffffff", lwd = 2 , lty = 1) +
+  tm_facets(by = "region", free.scales = TRUE) +
+  tm_shape(city_info %>%
+             #arrange(desc(population)) %>%
+             filter(!str_detect(abbrev, "AK|HI"))) +
+  tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal),  breaks = c(0, 5, 10, 15, 20), scale = 4, border.col = '#cfcfcf') +
+  tm_text(text = "city", alpha = 0.7, fontface = 'bold', remove.overlap = TRUE) + 
+  tm_facets(by = "region", free.coords = TRUE) +
+  #tm_credits("Source: state data from Norton and Kleege; local data from Chernick Copeland and Reschovsky.") +
+  tm_layout(legend.show = FALSE,
+            frame.lwd = 0)
+
+tmap_save(map, "~/Desktop/facets.png", height = 15, width = 20, dpi = 300, units = "in")
+
+##
+
+library(glue)
+
+##
+
+map(unique(regions$region), function(x){
+  map <- tm_shape(state_info %>%
+             filter(!str_detect(abbrev, "AK|HI")) %>%
+             filter(region == x)) +
+    tm_fill(col = "creditworthiness (rank)", border.col = '#ffffff', pal = rev(pal), breaks = c(0, 10, 20, 30, 40, 50)) +
+    tm_text(text = "abbrev", fontface = 'bold') +
+    tm_borders(col="#ffffff", lwd = 2 , lty = 1) +
+    tm_facets(by = "region", free.scales = TRUE) +
+    tm_shape(city_info %>%
+               filter(!str_detect(city, "Aurora|Yonkers|Frederick|Anaheim|Huntington Beach|Long Beach|Gary|Arlington|Riverside|Modesto")) %>%
+               filter(!str_detect(abbrev, "AK|HI")) %>%
+               filter(region == x)) +
+    tm_bubbles(col = "budget shortfall (%)", size = "population", pal = rev(pal), breaks = c(0, 5, 10, 15, 20), scale = 4,border.col = '#cfcfcf') +
+    tm_facets(by = "region", free.coords = TRUE) +
+    tm_shape(city_info %>%
+               filter(!str_detect(city, "Aurora|Yonkers|Frederick|Anaheim|Huntington Beach|Long Beach|Gary|Arlington|Riverside|Modesto|Tacoma|Gulfport|Salem|Mobile|Baton Rouge|Shreveport|Garland|Ft. Worth|Flint|Birmingham|Grand Rapids|Warren|Ft. Smith|Nampa|Santa Ana|Dover")) %>%
+               filter(abbrev != "WV") %>%
+               group_by(population) %>%
+               arrange(desc(population)) %>%
+               #slice(1) %>%
+               ungroup() %>%
+               filter(!str_detect(abbrev, "AK|HI")) %>%
+               filter(region == x)) +
+    tm_text(text = "city", alpha = 0.7, fontface = 'bold', remove.overlap = TRUE) + 
+    tm_facets(by = "region", free.coords = TRUE) +
+    tm_layout(paste(x),
+              legend.show = FALSE,
+              frame.lwd = 0)
+  
+  tmap_save(map, glue("~/Desktop/{x}.png"), height = 10, width = 10, dpi = 300, units = "in")
+  
+})
 
 map <- tm_shape(states %>%
                   rename(`budget shortfall (%)` = shortfall)) +
@@ -452,3 +551,55 @@ map <- tm_shape(states %>%
 
 tmap_save(map, "~/Desktop/state.png", height = 12, width = 16, dpi = 300, units = "in")
 
+## 
+
+proj_cities %>% select(-mild, -severe) %>% left_join(target) %>% filter(state == "CA") %>% arrange(desc(severe))
+proj_cities %>% select(-mild, -severe) %>% left_join(target) %>% filter(state == "IL")
+
+city_info %>% filter(abbrev == "CA") %>% arrange(desc(severe))
+
+## 
+
+cities_unproj <- 
+  read_sf("~/Desktop/test.geojson") %>% 
+  select(city, state, population) %>%
+  right_join(target) %>% 
+  select(city, state, population, mild, severe, geometry) %>%
+  rename(`budget shortfall (%)` = mild) %>%
+  st_as_sf()
+
+states_unproj <-
+  states(class = 'sf', cb = TRUE) %>%
+  transmute(state = NAME) %>%
+  left_join(budgets) %>%
+  select(state, shortfall, x, geometry) %>%
+  rename(`creditworthiness (rank)` = x) %>% 
+  drop_na(shortfall) %>%
+  st_as_sf()
+
+tmap_mode("view")
+
+##
+
+library(leaflet)
+
+##
+
+map <- leaflet() %>%
+  setView(0, 0, 4) %>%
+  addPolygons(data = states, 
+              color = "#444444", weight = 1, smoothFactor = 0.5,
+              opacity = 1.0, fillOpacity = 0.5,
+              fillColor = ~colorQuantile(rev(pal), x)(x),
+              highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                  bringToFront = TRUE)) %>%
+  addCircles(data = proj_cities %>%
+               st_coordinates() %>%
+               as_tibble() %>%
+               bind_cols(proj_cities) %>%
+               select(-geometry) %>%
+               select(-mild, -severe) %>% 
+               left_join(target),
+             lng = ~X, lat = ~Y,
+             radius = ~population, 
+             popup = ~mild)
