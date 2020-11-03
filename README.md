@@ -8,3 +8,4 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
 ![](viz/speed_gla.png)
 ![](viz/bars.png)
 ![](viz/urbanism/built.gif)
+![](viz/combined)
