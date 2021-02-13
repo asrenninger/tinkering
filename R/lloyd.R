@@ -9,7 +9,7 @@ library(gganimate)
 ## create a bounding box
 square <- st_polygon(list(rbind(c(-1,-1), c(1,-1), c(1,1), c(-1,1), c(-1,-1))))
 
-## generatea regular tesselation from it
+## generate a regular tesselation from it
 bounds <- 
   square %>% 
   st_make_grid(n = c(25, 25), square = FALSE) %>% 
