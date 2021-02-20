@@ -13,26 +13,16 @@ bounds <-
   st_union() %>% 
   st_combine()
 
-ireland <- 
+britain <- 
   oe_get(
-  "Republic of Ireland",
+  "Britain and Ireland",
   layer = "points",
   quiet = FALSE,
   query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'fuel'"
 )
 
-kingdom <- 
-  oe_get(
-    "United Kingdom",
-    layer = "points",
-    quiet = FALSE,
-    query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'fuel'"
-  )
-
 coordinates <- 
-  ireland %>%
-  filter(!geometry %in% kingdom$geometry) %>%
-  bind_rows(kingdom) %>%
+  britain
   st_coordinates() %>% 
   as_tibble()
 
@@ -56,26 +46,16 @@ stations <-
   theme_black() +
   ggsave("petroleonoi.png", height = 8, width = 8, dpi = 300)
 
-ireland <- 
+britain <- 
   oe_get(
-    "Republica of Ireland",
-    layer = "points",
-    quiet = FALSE,
-    query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'restaurant'"
-  )
-
-kingdom <- 
-  oe_get(
-    "United Kingdom",
+    "Britain and Ireland",
     layer = "points",
     quiet = FALSE,
     query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'restaurant'"
   )
 
 coordinates <- 
-  ireland %>%
-  filter(!geometry %in% kingdom$geometry) %>%
-  bind_rows(kingdom) %>%
+  britain %>%
   st_coordinates() %>% 
   as_tibble()
 
@@ -99,26 +79,16 @@ restaurants <-
   theme_black() +
   ggsave("restauronoi.png", height = 8, width = 8, dpi = 300)
 
-ireland <- 
+britain <- 
   oe_get(
-    "Republic of Ireland",
-    layer = "points",
-    quiet = FALSE,
-    query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'pub'"
-  )
-
-kingdom <- 
-  oe_get(
-    "United Kingdom",
+    "Britain and Ireland",
     layer = "points",
     quiet = FALSE,
     query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'pub'"
   )
 
 coordinates <- 
-  ireland %>%
-  filter(!geometry %in% kingdom$geometry) %>%
-  bind_rows(kingdom) %>%
+  britain %>%
   st_coordinates() %>% 
   as_tibble()
 
@@ -142,26 +112,16 @@ pubs <-
   theme_black() +
   ggsave("pubonoi.png", height = 8, width = 8, dpi = 300)
 
-ireland <- 
+britain <- 
   oe_get(
-    "Republic of Ireland",
-    layer = "points",
-    quiet = FALSE,
-    query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'school'"
-  )
-
-kingdom <- 
-  oe_get(
-    "United Kingdom",
+    "Britain and Ireland",
     layer = "points",
     quiet = FALSE,
     query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'school'"
   )
 
 coordinates <- 
-  ireland %>%
-  filter(!geometry %in% kingdom$geometry) %>%
-  bind_rows(kingdom) %>%
+  britain %>%
   st_coordinates() %>% 
   as_tibble()
 
