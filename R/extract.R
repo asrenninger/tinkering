@@ -1,7 +1,13 @@
+########################################
+## Various voronois with osmextract
+########################################
+
+## packages 
 library(osmextract)
 library(sf)
 library(tidyverse)
 
+## simpler to use natural earch to get country boundaries
 bounds <- 
   bind_rows(rnaturalearth::ne_countries(scale = 50, returnclass = 'sf') %>% 
               filter(str_detect(name_long, "United Kingdom")) %>%
@@ -13,6 +19,7 @@ bounds <-
   st_union() %>% 
   st_combine()
 
+## get and query the osm pbf file for the British Isles
 britain <- 
   oe_get(
   "Britain and Ireland",
@@ -21,16 +28,19 @@ britain <-
   query = "SELECT geometry FROM 'points' WHERE hstore_get_value(other_tags, 'amenity') = 'fuel'"
 )
 
+## coordinates for the point pattern 
 coordinates <- 
   britain
   st_coordinates() %>% 
   as_tibble()
 
+## create point pattern
 pointp <- spatstat::ppp(coordinates$X, coordinates$Y, window = spatstat::owin(xrange = c(st_bbox(bounds)$xmin, 
                                                                                          st_bbox(bounds)$xmax),
                                                                               yrange = c(st_bbox(bounds)$ymin, 
                                                                                          st_bbox(bounds)$ymax)))
 
+## create the voronoi polygons and then plot on a black background
 stations <- 
   ggplot(data = spatstat::dirichlet(pointp) %>% 
          st_as_sfc() %>%
@@ -46,6 +56,7 @@ stations <-
   theme_black() +
   ggsave("petroleonoi.png", height = 8, width = 8, dpi = 300)
 
+## repeat with restaurants
 britain <- 
   oe_get(
     "Britain and Ireland",
@@ -79,6 +90,7 @@ restaurants <-
   theme_black() +
   ggsave("restauronoi.png", height = 8, width = 8, dpi = 300)
 
+## repeat with pubs
 britain <- 
   oe_get(
     "Britain and Ireland",
@@ -112,6 +124,7 @@ pubs <-
   theme_black() +
   ggsave("pubonoi.png", height = 8, width = 8, dpi = 300)
 
+## repeat with schools
 britain <- 
   oe_get(
     "Britain and Ireland",
@@ -145,7 +158,9 @@ schools <-
   theme_black() +
   ggsave("educationonoi.png", height = 8, width = 8, dpi = 300)
 
+## patch it all together
 library(patchwork)
 patched <- (stations + pubs) / (restaurants + schools)
 
+## save it
 ggsave(patched, filename = "voronois.png", height = 11, width = 8, dpi = 300)
