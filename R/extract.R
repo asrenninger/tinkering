@@ -6,6 +6,7 @@
 library(osmextract)
 library(sf)
 library(tidyverse)
+library(glue)
 
 ## simpler to use natural earch to get country boundaries
 bounds <- 
@@ -53,8 +54,7 @@ stations <-
   geom_sf(aes(), colour = '#ffffff', fill = NA, lwd = 0.05, show.legend = FALSE) + 
   labs(title = "Petrol Stations") + 
   coord_sf(crs = 27700) + 
-  theme_black() +
-  ggsave("petroleonoi.png", height = 8, width = 8, dpi = 300)
+  theme_black()
 
 ## repeat with restaurants
 britain <- 
@@ -87,8 +87,7 @@ restaurants <-
   geom_sf(aes(), colour = '#ffffff', fill = NA, lwd = 0.05, show.legend = FALSE) + 
   labs(title = "Restaurants") + 
   coord_sf(crs = 27700) + 
-  theme_black() +
-  ggsave("restauronoi.png", height = 8, width = 8, dpi = 300)
+  theme_black()
 
 ## repeat with pubs
 britain <- 
@@ -121,8 +120,7 @@ pubs <-
   geom_sf(aes(), colour = '#ffffff', fill = NA, lwd = 0.05, show.legend = FALSE) + 
   labs(title = "Pubs") + 
   coord_sf(crs = 27700) + 
-  theme_black() +
-  ggsave("pubonoi.png", height = 8, width = 8, dpi = 300)
+  theme_black()
 
 ## repeat with schools
 britain <- 
@@ -155,8 +153,7 @@ schools <-
   geom_sf(aes(), colour = '#ffffff', fill = NA, lwd = 0.05, show.legend = FALSE) + 
   labs(title = "Schools") + 
   coord_sf(crs = 27700) + 
-  theme_black() +
-  ggsave("educationonoi.png", height = 8, width = 8, dpi = 300)
+  theme_black()
 
 ## patch it all together
 library(patchwork)
