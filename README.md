@@ -25,6 +25,9 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/combined.gif" alt=""/>
 </p>
 <p align="center">
+  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/rittenhouse_daylight.png" alt=""/>
+</p>
+<p align="center">
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/voronois.png" alt=""/>
 </p>
 <p align="center">
