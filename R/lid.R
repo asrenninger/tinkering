@@ -8,7 +8,7 @@ whitebox::wbt_lidar_tin_gridding(here::here("26902E233974N.las"),
                                  output = here::here("rittenhouse.tif"), minz = 0,
                                  resolution = 1, exclude_cls = '3,4,5,7,13,14,15,16,18')
 
-phillyraster = raster::raster("rittenhouse.tif")
+phillyraster = raster::raster("data/rittenhouse.tif")
 
 library(rayshader)
 library(lubridate)
@@ -70,7 +70,7 @@ whitebox::wbt_lidar_tin_gridding(here::here("26902E236614N.las"),
                                  output = here::here("logan.tif"), minz = 0,
                                  resolution = 1, exclude_cls = '3,4,5,7,13,14,15,16,18')
 
-phillyraster = raster::raster("logan.tif")
+phillyraster = raster::raster("data/logan.tif")
 
 
 building_mat = raster_to_matrix(phillyraster)
