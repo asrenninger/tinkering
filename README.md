@@ -19,7 +19,7 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/speed_gla.png" alt=""/>
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/bars.gif" alt=""/>
+  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/bars.png" alt=""/>
 </p>
 <p align="center">
   <img src="https://github.com/asrenninger/tinkering/raw/master/viz/urbanism/built.gif" alt=""/>
