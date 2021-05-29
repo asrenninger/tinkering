@@ -25,6 +25,9 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
   <img src="https://github.com/asrenninger/tinkering/raw/master/viz/urbanism/built.gif" alt=""/>
 </p>
 <p align="center">
+  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/flights_animated.gif" alt=""/>
+</p>
+<p align="center">
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/combined.gif" alt=""/>
 </p>
 <p align="center">
@@ -32,9 +35,6 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
 </p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/voronois.png" alt=""/>
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/flights_animated.gif" alt=""/>
 </p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/settlements_dymaxion.png" alt=""/>
