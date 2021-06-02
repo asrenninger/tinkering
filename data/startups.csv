@@ -1,0 +1,295 @@
+city,company,headquarters,lon,lat
+"San Francisco, California, U.S.",Uber,"Uber, San Francisco, California, U.S.",-122.4179707,37.7756852
+"Haidian District, Beijing, China",Xiaomi,"Xiaomi, Haidian District, Beijing, China",116.337475,40.026678
+"No. 969 West Wen Yi Road, Yuhang District, Hangzhou, Zhejiang ",Alibaba,"Alibaba, No. 969 West Wen Yi Road, Yuhang District, Hangzhou, Zhejiang ",120.0229089,30.2774719
+ShanghaiChina,Lufax,"Lufax, ShanghaiChina",-74.0112654,40.706877
+"New York City, NY, United States",UiPath,"UiPath, New York City, NY, United States",-73.97921459999999,40.7506982
+"San Francisco, California",Airbnb,"Airbnb, San Francisco, California",-122.4053769,37.771707
+"Beijing, China",Meituan-Dianping,"Meituan-Dianping, Beijing, China",116.4073963,39.90419989999999
+"Bangalore, Karnataka, India ",Flipkart,"Flipkart, Bangalore, Karnataka, India ",77.6927959,12.9267585
+"Beijing, China",Kuaishou,"Kuaishou, Beijing, China",116.503605,40.03716
+"San Francisco, California, U.S.",Doordash,"Doordash, San Francisco, California, U.S.",-122.3953084,37.7851845
+"Ningde, Fujian Province, China",CATL,"CATL, Ningde, Fujian Province, China",119.547932,26.665617
+"Santa Monica, California, U.S.",Snap Inc,"Snap Inc, Santa Monica, California, U.S.",-118.4534959,34.0162966
+"Shenzhen, China",Tencent Music,"Tencent Music, Shenzhen, China",-73.9425538,40.8947334
+"San Francisco, California, U.S.",Lyft,"Lyft, San Francisco, California, U.S.",-122.3920774,37.7765663
+"Amsterdam, Netherl",Adyen,"Adyen, Amsterdam, Netherl",4.905899799999999,52.3766216
+"Shanghai, China",Pinduoduo,"Pinduoduo, Shanghai, China",121.48337,31.235016
+"San Francisco, California, U.S.",Okta,"Okta, San Francisco, California, U.S.",-122.3976135,37.789152
+"San Francisco, California, U.S.",Pinterest,"Pinterest, San Francisco, California, U.S.",-122.399961,37.775454
+"Bozeman, Montana",Snowflake,"Snowflake, Bozeman, Montana",-111.1752275,45.06104
+"San Francisco, California, United States",Dropbox,"Dropbox, San Francisco, California, United States",-122.3930163,37.766053
+"San Francisco, California, U.S.",Zynga,"Zynga, San Francisco, California, U.S.",-122.4036654,37.7709273
+"Stockholm, Sweden",Spotify,"Spotify, Stockholm, Sweden",18.0629775,59.34183709999999
+"San Francisco, California United States",Twitter,"Twitter, San Francisco, California United States",-122.4172004,37.7764685
+"London, Engl",Deliveroo,"Deliveroo, London, Engl",-0.0912578,51.5101173
+"New York, New York, United States",Compass,"Compass, New York, New York, United States",-73.9693662,40.7613806
+"San Francisco, California, United States",Square,"Square, San Francisco, California, United States",-122.4175931,37.7752314
+"Lake Bluff, Illinois, United States",Stemcentrx,"Stemcentrx, Lake Bluff, Illinois, United States",-87.85750759999999,42.2844579
+"Chicago, Illinois, United States",Groupon,"Groupon, Chicago, Illinois, United States",-87.6433014,41.8975264
+"Berlin, Germany",Zalando,"Zalando, Berlin, Germany",13.432981,52.505531
+New York City,Peloton,"Peloton, New York City",-73.99432329999999,40.7433479
+"595 Market StreetSan Francisco, California, U.S.",Lending Club,"Lending Club, 595 Market StreetSan Francisco, California, U.S.",-122.4008042,37.789187
+Singapore,Sea Limited,"Sea Limited, Singapore",103.8528783,1.3331458
+"Beijing, China",Zhihu,"Zhihu, Beijing, China",-79.39565640000001,43.6628917
+"Sydney, Australia",Atlassian,"Atlassian, Sydney, Australia",151.2065778,-33.867077
+"Nashville, Tennessee, United States",SmileDirectClub,"SmileDirectClub, Nashville, Tennessee, United States",-86.7808709,36.1649101
+"San Francisco, California, U.S.",Cloudflare,"Cloudflare, San Francisco, California, U.S.",-122.3907504,37.7802866
+"Mountain View, California",Pure Storage,"Pure Storage, Mountain View, California",-122.0830261,37.3878672
+China,Maoyan,"Maoyan, China",111.6679913,40.8396903
+"Xiamen, Fujian, China",Luckin Coffee,"Luckin Coffee, Xiamen, Fujian, China",118.089425,24.479833
+"San Francisco, California, U.S.Palo Alto, California, U.S.",Pivotal,"Pivotal, San Francisco, California, U.S.Palo Alto, California, U.S.",-122.40403740000001,37.7818717
+"Beijing, China",Ucommune,"Ucommune, Beijing, China",116.306035,40.075920000000004
+"Mountain View, California, U.S.",Coursera,"Coursera, Mountain View, California, U.S.",-122.060844,37.3868492
+"San Francisco, California, United States",Postmates,"Postmates, San Francisco, California, United States",-122.3999147,37.7850203
+"Redwood City, California, U.S.",Box,"Box, Redwood City, California, U.S.",-122.2292839,37.4849566
+"San Mateo, California, U.S.",GoPro,"GoPro, San Mateo, California, U.S.",-122.3310388,37.5343456
+"San Jose, California, U.S.","Roku, Inc.","Roku, Inc., San Jose, California, U.S.",-121.9273114,37.3525994
+"San Francisco, CA, United States",AppDynamics,"AppDynamics, San Francisco, CA, United States",-122.395776,37.785712
+"4 Copley PlaceBoston, Massachusetts, U.S.",Wayfair,"Wayfair, 4 Copley PlaceBoston, Massachusetts, U.S.",-71.0772282,42.34872550000001
+"San Jose, California, United States",Nutanix,"Nutanix, San Jose, California, United States",-121.9181103,37.367648
+"Jerusalem, Israel",Mobileye,"Mobileye, Jerusalem, Israel",35.212711,31.80313
+"California,United States",MedMen,"MedMen, California,United States",-118.3673194,34.0905364
+"Palo Alto, California, United States",Better Place,"Better Place, Palo Alto, California, United States",-122.1132559,37.45185480000001
+"London, Engl",Farfetch,"Farfetch, London, Engl",-0.0889932,51.5262825
+"New York, New York, United States",Freshly,"Freshly, New York, New York, United States",-73.9855319,40.740063
+"San Francisco, California, U.S.",MuleSoft,"MuleSoft, San Francisco, California, U.S.",-122.3972074,37.7899024
+"Chicago, U.S.",LivingSocial,"LivingSocial, Chicago, U.S.",-87.62694940000002,41.8882056
+"Mountain View, California, United States",WhatsApp,"WhatsApp, Mountain View, California, United States",-122.0840897,37.4220656
+"Bangalore, India",Quikr,"Quikr, Bangalore, India",77.6256575,13.0580013
+"Bedford, New Hampshire, U.S.",Ninebot,"Ninebot, Bedford, New Hampshire, U.S.",-71.45675059999999,42.9281617
+"Austin, Texas, United States",HomeAway,"HomeAway, Austin, Texas, United States",-97.7552903,30.270156
+"Santa Clara, California, United States",Jasper,"Jasper, Santa Clara, California, United States",-121.9811741,37.4064187
+"San Francisco, California",Sunrun,"Sunrun, San Francisco, California",-122.4012094,37.7908857
+"40th floor Samsung Electronics Building, 11, Seocho-daero 74-gil, Seocho District, Seoul, South Korea",Solstice,"Solstice, 40th floor Samsung Electronics Building, 11, Seocho-daero 74-gil, Seocho District, Seoul, South Korea",127.0269023,37.4966085
+"Sunnyvale, California",Good Technology,"Good Technology, Sunnyvale, California",-122.0390618,37.3900725
+"Fairway Business Park, Embassy Golf Link, Challaghatta, Bangalore, Karnataka, India",Bigbasket,"Bigbasket, Fairway Business Park, Embassy Golf Link, Challaghatta, Bangalore, Karnataka, India",77.6424012,12.9516295
+"New York, N.Y., USA",Gilt Groupe,"Gilt Groupe, New York, N.Y., USA",-73.98249369999999,40.7462972
+"Holmdel, New Jersey, United States",Vonage,"Vonage, Holmdel, New Jersey, United States",-74.18792909999999,40.3475129
+"Gurugram, Haryana, India",ShopClues,"ShopClues, Gurugram, Haryana, India",77.0719039,28.4513871
+"Seattle, Washington, U.S.",Zulily,"Zulily, Seattle, Washington, U.S.",-122.3522408,47.6142507
+"San Mateo, California, U.S.",Coupa,"Coupa, San Mateo, California, U.S.",NA,NA
+"Sunnyvale, California, U.S.",LinkedIn,"LinkedIn, Sunnyvale, California, U.S.",-122.0407308,37.3926268
+"San Francisco, United States",Twilio,"Twilio, San Francisco, United States",-122.3915621,37.7879235
+"Spring, Texas, United States",SimpliVity,"SimpliVity, Spring, Texas, United States",-95.4440082,30.0949505
+"San Jose, California, U.S.",Zoom,"Zoom, San Jose, California, U.S.",-121.8949083,37.3328541
+"Ottawa, Ontario, Canada",Shopify,"Shopify, Ottawa, Ontario, Canada",-75.69317029999999,45.4204811
+"Atlanta, USA",AirWatch,"AirWatch, Atlanta, USA",-84.35099360000001,33.9299831
+Carpinteria,Lynda.com,"Lynda.com, Carpinteria",-119.4852553,34.3852668
+"San Francisco, CA, United States",New Relic,"New Relic, San Francisco, CA, United States",-122.3929712,37.7913249
+"Venice, California, U.S.",Dollar Shave Club,"Dollar Shave Club, Venice, California, U.S.",-118.4393002,33.9883764
+"Mountain View, California, U.S.",Quotient Technology,"Quotient Technology, Mountain View, California, U.S.",-122.0503209,37.3976782
+"Admiralty, Hong Kong",Futu Holdings,"Futu Holdings, Admiralty, Hong Kong",114.1652079,22.278546
+"Edinburgh, Scotl",Skyscanner,"Skyscanner, Edinburgh, Scotl",-3.1943123,55.944617
+"Dubai, UAE",Souq.com,"Souq.com, Dubai, UAE",55.26097559999999,25.1937696
+"New York City, New York, U.S.",Blue Apron,"Blue Apron, New York City, New York, U.S.",-74.0091305,40.7081605
+"San Francisco, California, U.S.",Stitch Fix,"Stitch Fix, San Francisco, California, U.S.",-122.4033684,37.7893049
+"Santa Monica, California, U.S.",Ring,"Ring, Santa Monica, California, U.S.",-118.4719105,34.031478
+"Chaoyang District, Beijing, China",Mobike,"Mobike, Chaoyang District, Beijing, China",116.4446279,39.9518285
+"Shanghai, China",Ele.me,"Ele.me, Shanghai, China",121.455409,31.218785
+"Stockholm, Sweden",IZettle,"IZettle, Stockholm, Sweden",18.0666618,59.33435850000001
+"200 Technology SquareCambridge, Massachusetts, U.S.",Moderna Therapeutics,"Moderna Therapeutics, 200 Technology SquareCambridge, Massachusetts, U.S.",-71.0910761,42.3633639
+"Xihu District, Hangzhou, China",Ant Group,"Ant Group, Xihu District, Hangzhou, China",120.130211,30.259312
+"Haidian District, Beijing, China",ByteDance,"ByteDance, Haidian District, Beijing, China",116.3295454,39.9721322
+"San Francisco, California, US ",Stripe,"Stripe, San Francisco, California, US ",-122.4002525,37.7731529
+"Hawthorne, California, United States",SpaceX,"SpaceX, Hawthorne, California, United States",-118.3280246,33.9207525
+"Beijing, China",DiDi,"DiDi, Beijing, China",116.470413,39.912678
+"San Francisco, California, US",Instacart,"Instacart, San Francisco, California, US",-122.3963906,37.791302
+"Stockholm, Sweden",Klarna,"Klarna, Stockholm, Sweden",18.0623904,59.33717110000001
+"London, United Kingdom",Telegram,"Telegram, London, United Kingdom",-0.1453021,51.49426649999999
+"Cary, North Carolina, US",Epic Games,"Epic Games, Cary, North Carolina, US",-78.7336291,35.7559459
+"San Francisco, California, United States",Databricks,"Databricks, San Francisco, California, United States",-122.393741,37.791365
+"Irvine, California, United States",Rivian,"Rivian, Irvine, California, United States",-117.7595267,33.6651975
+"São Paulo, Brazil",Nubank,"Nubank, São Paulo, Brazil",-46.6733661,-23.5610958
+"Washington D.C., United States",JUUL Labs,"JUUL Labs, Washington D.C., United States",-122.3860635,37.7608061
+"Hangzhou, China",Cainiao,"Cainiao, Hangzhou, China",120.310516,30.410939
+"B-121, Sector 5, Noida, Uttar Pradesh, India",Paytm,"Paytm, B-121, Sector 5, Noida, Uttar Pradesh, India",NA,NA
+"Sydney, Australia",Canva,"Canva, Sydney, Australia",151.2113686,-33.885392
+"Shenzhen, Guangdong, China",DJI,"DJI, Shenzhen, Guangdong, China",113.9868015,22.5248895
+"Bengaluru, Karnataka, India",Byju's,"Byju's, Bengaluru, Karnataka, India",77.60955609999999,12.9341735
+"San Francisco, California, United States",Chime,"Chime, San Francisco, California, United States",-122.0054475,37.5930571
+Singapore,Grab,"Grab, Singapore",-76.6095766,39.3303479
+"San Francisco, California",Plaid,"Plaid, San Francisco, California",-122.40611,37.7761178
+"Jacksonville, Florida, U.S.",Fanatics,"Fanatics, Jacksonville, Florida, U.S.",-81.5927099,30.2397158
+"San Diego, USA",Biosplice Therapeutics,"Biosplice Therapeutics, San Diego, USA",-117.2081276,32.8773797
+"Menlo Park, California, U.S.",Robinhood,"Robinhood, Menlo Park, California, U.S.",-122.164937,37.4544245
+"Beijing, China",Jiedaibao,"Jiedaibao, Beijing, China",116.4073963,39.90419989999999
+"San Francisco, California, U.S.",Ripple,"Ripple, San Francisco, California, U.S.",-122.4027474,37.7920819
+"Jakarta, Indonesia",Gojek,"Gojek, Jakarta, Indonesia",106.8029888,-6.2441793
+"Boston, MA - USA",OutSystems,"OutSystems, Boston, MA - USA",-71.0468811,42.3516618
+"Shenzhen, China",WeBank,"WeBank, Shenzhen, China",113.942657,22.556365
+Kirkl,Tanium,"Tanium, Kirkl",-85.41502299999999,31.22806899999999
+Stockholm,Trustly,"Trustly, Stockholm",18.0620562,59.34141690000001
+"Gurgaon, Haryana, India",OYO,"OYO, Gurgaon, Haryana, India",77.05371699999999,28.4307028
+"Philadelphia, Pennsylvania, United States",GoPuff,"GoPuff, Philadelphia, Pennsylvania, United States",-75.14306839999999,39.9610185
+"Toronto, Ontario",OneConnect,"OneConnect, Toronto, Ontario",-79.3777753,43.6479845
+"San Francisco, CA",Brex,"Brex, San Francisco, CA",-122.3943766,37.7815789
+"Beijing, China",JD Finance,"JD Finance, Beijing, China",-73.9425538,40.8947334
+"Pittsburgh, Pennsylvania, U.S.",Argo AI,"Argo AI, Pittsburgh, Pennsylvania, U.S.",-79.9813601,40.4560009
+"Jakarta, Indonesia",Tokopedia,"Tokopedia, Jakarta, Indonesia",106.8191269,-6.221066299999999
+"Science Park, Hong Kong",SenseTime,"SenseTime, Science Park, Hong Kong",114.2085857,22.4290682
+Basel,Roivant Sciences,"Roivant Sciences, Basel",7.587584499999999,47.5489496
+"New York City, New York, U.S.",WeWork,"WeWork, New York City, New York, U.S.",-73.9754543,40.7536175
+"San Jose, California, U.S.",Automation Anywhere,"Automation Anywhere, San Jose, California, U.S.",-121.9207684,37.3970903
+"Bangalore, India",Ola Cabs,"Ola Cabs, Bangalore, India",77.6199482,12.9239969
+"San Francisco, United States",GitLab,"GitLab, San Francisco, United States",-122.4018225,37.7912749
+"San Francisco, California, U.S.",Reddit,"Reddit, San Francisco, California, U.S.",-122.4111785,37.7862472
+"San Francisco, California, US",Airtable,"Airtable, San Francisco, California, US",-122.405238,37.7858936
+"Montreal, Quebec, Canada ",Vice Media,"Vice Media, Montreal, Quebec, Canada ",-73.56198309999999,45.4919989
+"London, Engl",Revolut,"Revolut, London, Engl",-0.0258565,51.5062984
+"Ashford Park View,  Bangalore, Karnataka, India",PhonePe,"PhonePe, Ashford Park View,  Bangalore, Karnataka, India",77.63274729999999,12.9286859
+"Gurgaon, Haryana, India",Zomato,"Zomato, Gurgaon, Haryana, India",77.07526299999999,28.450334
+"Bundang-gu, Seongnam, South Korea",Bluehole,"Bluehole, Bundang-gu, Seongnam, South Korea",127.1122752,37.3942859
+"Mumbai, Maharashtra, India",Dream11,"Dream11, Mumbai, Maharashtra, India",72.8292536,18.9986252
+"Bangalore, India",Swiggy,"Swiggy, Bangalore, India",77.63637299999999,12.9772554
+"Plantation, Florida",Magic Leap,"Magic Leap, Plantation, Florida",-80.25322729999999,26.1455326
+"San Francisco, CA",Zenefits,"Zenefits, San Francisco, CA",-122.3960668,37.7911385
+"Zhuhai, Guangdong, China",Meizu,"Meizu, Zhuhai, Guangdong, China",113.5527488,22.2214347
+"San Francisco, California, U.S.",SoFi,"SoFi, San Francisco, California, U.S.",-122.3955492,37.7878615
+South Korea,Yello Mobile,"Yello Mobile, South Korea",NA,NA
+"Boston, United States of America",Ginkgo Bioworks,"Ginkgo Bioworks, Boston, United States of America",-71.0279912,42.3443804
+"Palo Alto, California, United States",TripActions,"TripActions, Palo Alto, California, United States",-122.1497619,37.4121557
+"Shenzhen, China",UBtech Robotics,"UBtech Robotics, Shenzhen, China",-118.240693,34.0348298
+"San Francisco, California, U.S.",Niantic,"Niantic, San Francisco, California, U.S.",-122.4695526,37.7032518
+"Saint-Denis, Seine-Saint-Denis, France",Veepee,"Veepee, Saint-Denis, Seine-Saint-Denis, France",2.3554165,48.9264107
+"New York City, U.S.",VAST Data,"VAST Data, New York City, U.S.",-73.9861749,40.7551279
+"Lampung, Indonesia",Bukalapak,"Bukalapak, Lampung, Indonesia",105.249,-5.34711
+"Klosterstraße 62, 10179, Berlin, Germany",N26,"N26, Klosterstraße 62, 10179, Berlin, Germany",13.412563,52.5160867
+"London, United Kingdom",Wise,"Wise, London, United Kingdom",-0.142214,51.5185048
+"San Francisco, California, U.S.",Credit Karma,"Credit Karma, San Francisco, California, U.S.",-122.4053605,37.7864247
+"Palo Alto, California, United States",Rubrik,"Rubrik, Palo Alto, California, United States",-122.1479049,37.3943912
+"Foster City, California",Zoox,"Zoox, Foster City, California",-122.2723879,37.5679069
+"Mountain View, California, United States",SentinelOne,"SentinelOne, Mountain View, California, United States",-122.0816825,37.3905182
+"Bogotá, Colombia",Rappi,"Rappi, Bogotá, Colombia",-74.0554112,4.678789
+"Jakarta, Indonesia",Traveloka,"Traveloka, Jakarta, Indonesia",NA,NA
+"San Francisco, California",Automattic,"Automattic, San Francisco, California",-122.4215887,37.7441195
+"New York City, U.S.",Warby Parker,"Warby Parker, New York City, U.S.",-73.98022499999999,40.759671
+"Noida, India",Pine Labs,"Pine Labs, Noida, India",77.3581213,28.6216838
+"Delhi, India, India",Delhivery,"Delhivery, Delhi, India, India",77.1962542,28.5413411
+"Jakarta, Indonesia",OVO,"OVO, Jakarta, Indonesia",106.8301099,-6.217334
+"Bristol, United Kingdom",Graphcore,"Graphcore, Bristol, United Kingdom",-2.5923872,51.4552872
+"Santa Clara, California, United States",Netskope,"Netskope, Santa Clara, California, United States",-121.9693394,37.3825772
+"London, United Kingdom",OakNorth,"OakNorth, London, United Kingdom",-0.13734180000000001,51.5130211
+"Pudong, Shanghai, China",UnionPay,"UnionPay, Pudong, Shanghai, China",121.549378,31.220766
+"Bellevue, WashingtonUnited States",Icertis,"Icertis, Bellevue, WashingtonUnited States",-122.1439687,47.6354269
+"Santa Monica, California, United States",Bird,"Bird, Santa Monica, California, United States",-118.4820549,34.019996
+"Seattle, Washington",Convoy,"Convoy, Seattle, Washington",-122.3354075,47.6141684
+"Boston, Massachusetts",Toast,"Toast, Boston, Massachusetts",-71.10317359999999,42.3444059
+"Istanbul, Turkey",Getir,"Getir, Istanbul, Turkey",28.6186443,41.0024132
+"London, United Kingdom",Cazoo,"Cazoo, London, United Kingdom",-0.1299429,51.5291613
+"Manchester, Engl",The Hut Group,"The Hut Group, Manchester, Engl",-2.2969412,53.4731239
+"London, Engl",Monzo,"Monzo, London, Engl",-0.080945,51.5212806
+"Faridabad, Delhi NCR, India",Lenskart,"Lenskart, Faridabad, Delhi NCR, India",77.3294172,28.3715589
+"Gurgaon, Haryana, India",PolicyBazaar,"PolicyBazaar, Gurgaon, Haryana, India",77.0716647,28.450294800000002
+"Austin, Texas",Mozido,"Mozido, Austin, Texas",-97.79159460000001,30.2599616
+"Palo Alto, California, U.S.",Houzz,"Houzz, Palo Alto, California, U.S.",-122.1607349,37.4450995
+"Los Angeles, California, US",Relativity Space,"Relativity Space, Los Angeles, California, US",-118.2436849,34.0522342
+"Bangalore, Karnataka, India",CRED,"CRED, Bangalore, Karnataka, India",77.64132099999999,12.963803
+"San Francisco, California, US",Nextdoor,"Nextdoor, San Francisco, California, US",-122.4111101,37.7864553
+"Bangalore, Karnataka, India",Meesho,"Meesho, Bangalore, Karnataka, India",77.6297597,12.9382942
+"Bangalore, India",ShareChat,"ShareChat, Bangalore, India",77.6108665,12.9336558
+"Edinburgh, UK",FNZ,"FNZ, Edinburgh, UK",-3.2019661,55.9629671
+"London, UK",Octopus Energy,"Octopus Energy, London, UK",-0.1384448,51.5157763
+"London, United Kingdom",Babylon Health,"Babylon Health, London, United Kingdom",-0.167214,51.49301500000001
+"San Mateo, California, United States",Tipalti,"Tipalti, San Mateo, California, United States",-122.2816111,37.5567602
+"San Francisco, California, U.S.",Udemy,"Udemy, San Francisco, California, U.S.",-122.3959203,37.7842574
+Munich,FlixMobility,"FlixMobility, Munich",11.5202607,48.14454809999999
+"Palo Alto, California",AppLovin,"AppLovin, Palo Alto, California",-122.1585311,37.4426345
+"San Francisco, United States",AppsFlyer,"AppsFlyer, San Francisco, United States",-122.3974389,37.7894778
+"Oxford Science Park, Oxford, United Kingdom",Oxford Nanopore Technologies,"Oxford Nanopore Technologies, Oxford Science Park, Oxford, United Kingdom",-1.2197506,51.7144993
+"Gurgaon, Haryana, India",ReNew Power,"ReNew Power, Gurgaon, Haryana, India",77.0973243,28.4538136
+"Bangalore, India",Unacademy,"Unacademy, Bangalore, India",77.63708059999999,12.980552
+"Gurgaon, Haryana India",Urban Company,"Urban Company, Gurgaon, Haryana India",77.08991499999999,28.508733
+"Bangalore, Karnataka, India",Zerodha,"Zerodha, Bangalore, Karnataka, India",77.5499311,13.0031283
+"Chicago, Illinois, U.S.",Avant,"Avant, Chicago, Illinois, U.S.",-87.6327762,41.8865777
+Sunnyvale,ThoughtSpot,"ThoughtSpot, Sunnyvale",-122.0407495,37.3870684
+"Boston, MA, United States",Intarcia Therapeutics,"Intarcia Therapeutics, Boston, MA, United States",-71.0455155,42.3530258
+Shanghai,Youxia Motors,"Youxia Motors, Shanghai",121.40958,31.14765
+"Tel Aviv, Israel",Monday.com,"Monday.com, Tel Aviv, Israel",34.781455,32.0637436
+Zug,Dfinity,"Dfinity, Zug",-77.0640103,38.80123529999999
+"San Francisco, CA",Prosper Marketplace,"Prosper Marketplace, San Francisco, CA",-122.3920574,37.7904128
+"Istanbul, Turkey",Peak Games,"Peak Games, Istanbul, Turkey",29.0357923,41.0114619
+"Beijing, China",Apus Group,"Apus Group, Beijing, China",13.914163,52.5859786
+"Moscow, Russia",Avito.ru,"Avito.ru, Moscow, Russia",37.587925,55.7785944
+Mumbai,Billdesk,"Billdesk, Mumbai",72.8368976,19.1336882
+"Culver City, California, United States",NantOmics,"NantOmics, Culver City, California, United States",-118.3879207,34.0143728
+"Mountain View, California, U.S.",Quora,"Quora, Mountain View, California, U.S.",-122.0822826,37.3880555
+"New York, New York",Sprinklr,"Sprinklr, New York, New York",-73.9854829,40.7499318
+"New York City, United States",Zocdoc,"Zocdoc, New York City, United States",-73.997337,40.724313
+"Sunnyvale, California, United States",23andMe,"23andMe, Sunnyvale, California, United States",-122.0335651,37.3827751
+"San Francisco, California",Thumbtack,"Thumbtack, San Francisco, California",-122.416524,37.7770186
+"San Francisco, California",Carta,"Carta, San Francisco, California",-122.4030701,37.790599
+"660 Alabama Street, San Francisco, California, 94110",PAX Labs,"PAX Labs, 660 Alabama Street, San Francisco, California, 94110",-122.4122007,37.7609527
+"Hamilton, Bermuda",Afiniti,"Afiniti, Hamilton, Bermuda",-64.7858887,32.2945837
+"Paris, France",BlaBlaCar,"BlaBlaCar, Paris, France",2.3796542,48.8641086
+"Burnaby, British Columbia, Canada",Clio,"Clio, Burnaby, British Columbia, Canada",-122.9952853,49.2557456
+"Waltham, MAHerzliya, Israel",Infinidat,"Infinidat, Waltham, MAHerzliya, Israel",34.80777,32.1606578
+"Stockholm, Sweden",Northvolt,"Northvolt, Stockholm, Sweden",18.0284886,59.3362436
+London,Gett,"Gett, London",-0.1088533,51.5168555
+"Chicago,Illinois",Mu Sigma,"Mu Sigma, Chicago,Illinois",-87.86277779999999,42.1388889
+"Lehi, Utah, United States",Podium,"Podium, Lehi, Utah, United States",-111.8761569,40.4201182
+New York City ,Letgo,"Letgo, New York City ",-73.99948499999999,40.721803
+"Pittsburgh, Pennsylvania, United States",Duolingo,"Duolingo, Pittsburgh, Pennsylvania, United States",-79.92678,40.461627
+"Paris, Boston, London",Mirakl,"Mirakl, Paris, Boston, London",-0.1395758,51.513004
+"VNG Campus  Lot Z06, St. 13, Tan Thuan Dong Ward, Dist. 7, Ho Chi Minh City, Vietnam",VNG,"VNG, VNG Campus  Lot Z06, St. 13, Tan Thuan Dong Ward, Dist. 7, Ho Chi Minh City, Vietnam",106.745479,10.7584721
+"McLean, Virginia, U.S.",ID.me,"ID.me, McLean, Virginia, U.S.",-77.2310851,38.9247641
+"Shanghai, China",Hellobike,"Hellobike, Shanghai, China",121.473701,31.230416
+"Bangalore, India",Zeta,"Zeta, Bangalore, India",77.64319449999999,12.9600891
+"New York City, United States",Dataiku,"Dataiku, New York City, United States",-73.98939589999999,40.7393279
+"New York City, New York, United States",Stash,"Stash, New York City, New York, United States",-74.0020977,40.7392999
+"New York City, New York, U.S.",Away,"Away, New York City, New York, U.S.",-73.9942986,40.726979300000004
+"Vilnius, Lithuania",Vinted,"Vinted, Vilnius, Lithuania",25.2684872,54.67379560000001
+"Paris, Île-de-France, France",Deezer,"Deezer, Paris, Île-de-France, France",2.3300341,48.8829153
+"New Delhi, India",Hike Messenger,"Hike Messenger, New Delhi, India",77.12153169999999,28.5505083
+"Stockholm, Sweden",Epidemic Sound,"Epidemic Sound, Stockholm, Sweden",18.0704029,59.3134933
+"San Francisco, California",Gupshup,"Gupshup, San Francisco, California",-121.9963392,37.5530111
+"No. 969 West Wen Yi Road, Yuhang District, Hangzhou, Zhejiang ",Alisports,"Alisports, No. 969 West Wen Yi Road, Yuhang District, Hangzhou, Zhejiang ",120.0229089,30.2774719
+"San Francisco, California",KeepTruckin,"KeepTruckin, San Francisco, California",-122.3984543,37.7856552
+"Boston, Massachusetts",ezCater,"ezCater, Boston, Massachusetts",-71.0568698,42.3576883
+"Cambridge, Engl",Darktrace,"Darktrace, Cambridge, Engl",0.1518052,52.233012
+"New York City, USA",BigID,"BigID, New York City, USA",-73.99470010000002,40.7409313
+"Paris, France",Voodoo,"Voodoo, Paris, France",2.327608,48.8805434
+"Beijing, China",Bitmain,"Bitmain, Beijing, China",116.4073963,39.90419989999999
+"Nanjing, China",Byton,"Byton, Nanjing, China",118.842268,31.985932
+"Mumbai, Maharashtra, India",Nykaa,"Nykaa, Mumbai, Maharashtra, India",72.8265302,19.0122254
+"Quebec City, Quebec, Canada",Coveo,"Coveo, Quebec City, Quebec, Canada",-71.308987,46.767183
+"New York City, United States",Wheels Up,"Wheels Up, New York City, United States",NA,NA
+"New York City, United States",Sisense,"Sisense, New York City, United States",-73.98775400000001,40.75184
+"Calgary, Alberta, Canada",Benevity,"Benevity, Calgary, Alberta, Canada",-114.051017,51.051621
+Singapore,Global Fashion Group,"Global Fashion Group, Singapore",103.8420715,1.2743272
+"San Francisco, California, United States",Instabase,"Instabase, San Francisco, California, United States",-122.4026159,37.7898122
+"Tel Aviv, Israel",IronSource,"IronSource, Tel Aviv, Israel",34.789187,32.0717507
+"Rheinweg 9, 8200 Schaffhausen, Switzerl",Acronis,"Acronis, Rheinweg 9, 8200 Schaffhausen, Switzerl",8.6230921,47.6915809
+"Detroit, Michigan, United States",StockX,"StockX, Detroit, Michigan, United States",-83.04640789999999,42.3323273
+"Bangalore, Karnataka, India",InMobi,"InMobi, Bangalore, Karnataka, India",77.69455339999999,12.9351775
+"Barcelona, Spain",Glovo,"Glovo, Barcelona, Spain",2.1978804,41.4009881
+"Jerusalem, Israel",Lightricks,"Lightricks, Jerusalem, Israel",35.1965687,31.7674812
+"Glendale, California, U.S.","Age of Learning, Inc.","Age of Learning, Inc., Glendale, California, U.S.",-118.2557381,34.1469198
+"New York City, USA",Rent the Runway,"Rent the Runway, New York City, USA",-73.9948227,40.7371865
+"Jakarta, Indonesia",JD Indonesia,"JD Indonesia, Jakarta, Indonesia",106.835375,-6.2164671
+"71 Stevenson Street, Floor 20San Francisco, California, U.S.",WalkMe,"WalkMe, 71 Stevenson Street, Floor 20San Francisco, California, U.S.",-122.3993759,37.7896423
+Luxembourg,OCSiAl,"OCSiAl, Luxembourg",6.0719099,49.5629743
+"London, UK",Gousto,"Gousto, London, UK",-0.2190803,51.5028863
+"New Delhi, India",Snapdeal,"Snapdeal, New Delhi, India",77.0775536,28.4997162
+"Shenzhen, Guangdong Province, China",iCarbonX,"iCarbonX, Shenzhen, Guangdong Province, China",114.057865,22.543096
+Hong Kong,Lalamove,"Lalamove, Hong Kong",114.147278,22.3393726
+Dubai,Careem,"Careem, Dubai",55.152872,25.089578
+"Beijing, China",Unisound,"Unisound, Beijing, China",116.4073963,39.90419989999999
+"Beijing, China",Xiaozhu.com,"Xiaozhu.com, Beijing, China",116.15812,40.573917
+"New York City, U.S.Washington, D.C., U.S.",Vox Media,"Vox Media, New York City, U.S.Washington, D.C., U.S.",-77.0407461,38.9060648
+"380 Portage Avenue, Palo Alto, CA 94306, US",Essential Products,"Essential Products, 380 Portage Avenue, Palo Alto, CA 94306, US",-122.1377782,37.4226852
+Hong Kong,GoGoVan,"GoGoVan, Hong Kong",NA,NA
+"Salesforce Tower AtlantaAtlanta, Georgia, United States",Rubicon Global,"Rubicon Global, Salesforce Tower AtlantaAtlanta, Georgia, United States",-84.3571128,33.84724
+"Emeryville, California",Udacity,"Udacity, Emeryville, California",-122.397123,37.78551530000001
+"Har Hotzvim, Jerusalem, Israel",OrCam,"OrCam, Har Hotzvim, Jerusalem, Israel",35.210823,31.8003902
+"10 Bishops Square, London, E1 6EG, UK ",Improbable,"Improbable, 10 Bishops Square, London, E1 6EG, UK ",-0.07745429999999999,51.5194366
+"Tallinn, Estonia",Bolt,"Bolt, Tallinn, Estonia",24.7510108,59.41781779999999
+San Francisco,One Medical,"One Medical, San Francisco",-122.4343854,37.7889718
+"San Francisco, USA",Talkdesk,"Talkdesk, San Francisco, USA",-122.3980784,37.79219519999999
+"Sydney, Australia",Nearmap,"Nearmap, Sydney, Australia",151.2021442,-33.8637049
+"Sunnyvale, California, United States",Druva,"Druva, Sunnyvale, California, United States",-122.0376553,37.3824318
+"San Francisco, California, U.S.",Turo,"Turo, San Francisco, California, U.S.",-122.4005403,37.7871917
+Hong Kong,WeLab,"WeLab, Hong Kong",114.2074879,22.2915388
+"Tallinn, Estonia ",Pipedrive,"Pipedrive, Tallinn, Estonia ",24.7041506,59.4281707
+"Bangalore, Karnataka, India",Glance,"Glance, Bangalore, Karnataka, India",77.6946213,12.9357874
+"Bangalore, Karnataka, India",Groww,"Groww, Bangalore, Karnataka, India",77.63193059999999,12.9256972
