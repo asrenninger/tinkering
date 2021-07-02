@@ -18,7 +18,7 @@ states <- states(cb = TRUE, class = 'sf') %>%
 
 plot(states)
 
-map(str_pad(29, side = 'left', width = 2, pad = "0"), 
+map(str_pad(1:30, side = 'left', width = 2, pad = "0"), 
     function(x) {
       
       download.file(glue("https://ftp.cpc.ncep.noaa.gov/GIS/GRADS_GIS/GeoTIFF/TEMP/us_tmax/us.tmax_nohads_ll_202106{x}_float.tif"),
@@ -32,7 +32,7 @@ bnds <- replace(bnds, bnds == 40, "+")
 labs <- paste(bnds[1:10], bnds[2:11], sep = " to ") %>%
   if_else(str_detect(., "\\-|\\+"), str_remove_all(., "to "), .)
 
-map(str_pad(29, side = 'left', width = 2, pad = "0"),
+map(str_pad(1:30, side = 'left', width = 2, pad = "0"),
     function(x, aoi = states){
       
       file <- glue("data/weather/202106{x}.tif")
@@ -74,7 +74,7 @@ map(str_pad(29, side = 'left', width = 2, pad = "0"),
 dir_ls("viz/weather", pattern = ".*png") %>% 
   image_read() %>% 
   image_join() %>% 
-  image_animate(fps = 5) %>% 
+  image_animate(fps = 2.5) %>% 
   image_write("weather.gif")
 
 
