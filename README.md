@@ -43,5 +43,5 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/flights_animated.gif" alt=""/>
 </p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/coastline.gif" alt=""/>
+  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/coastline.gif" alt="" width="300"/>
 </p>
