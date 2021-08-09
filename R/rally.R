@@ -1,5 +1,5 @@
 ########################################
-## Temperature change in june
+## Trump rallies
 ########################################
 
 ## packages 
@@ -103,6 +103,7 @@ anim_save("rallies.gif", animation = anim,
           start_pause = 0, end_pause = 2)
 
 ## summary statistics
+# 13 rallies in PA | 7 in Florida and Michigan | 6 in Wisconsin
 campaign %>%
   st_as_sf(coords = c("X", "Y"), crs = 2163) %>%
   st_intersection(states) %>% 
@@ -111,6 +112,21 @@ campaign %>%
   summarise(n = n()) %>%
   arrange(desc(n)) 
 
+# 35 days on the trail
 combined %>% 
+  group_by(location, date) %>%
+  summarise(n = n()) %>%
   group_by(location) %>%
+  summarise(n = n())
+
+# best days had 5 rallies
+combined %>% 
+  group_by(date, location) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n))
+
+# 11 rallies in November prior to the election
+combined %>% 
+  mutate(month = lubridate::month(date)) %>%
+  group_by(month) %>% 
   summarise(n = n())
