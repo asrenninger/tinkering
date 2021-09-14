@@ -325,12 +325,15 @@ holdout_fit <-
       data = prediction_juice
   )
 
-## for this true holdout set, no leakage (I think), we get a MAE of 2.71 housing units
+## MAE of 1.81 on 28 block groups
 vector_variables %>% 
   left_join(raster_variables) %>%
   drop_na() %>%
-  transmute(density_gap = log(abs(density_gap)),
+  transmute(GEOID, 
+            density_gap = log(abs(density_gap)),
             prediction = predict(holdout_fit, holdout_juice)$.pred) %>%
-  summarise(MAE = mean(abs(density_gap - prediction))) %>% 
+  filter(str_sub(GEOID, 1, 5) == holdout) %>%
+  summarise(MAE = mean(abs(density_gap - prediction)),
+            n = n()) %>% 
   mutate(MAE = exp(MAE))
 
