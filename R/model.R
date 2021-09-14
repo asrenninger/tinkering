@@ -54,14 +54,16 @@ vector_variables <-
   select(all_of(vars)) 
 
 ## testing the model
-lm(density_gap ~ .,
+mod_linear <- 
+  lm(density_gap ~ .,
    data = 
      vector_variables %>% 
      left_join(raster_variables) %>%
      # remove what is not significant
      select(-GEOID, -sign, -straightness, -pct_bach, -pct_unit_renter, -pct_unit_vacant) %>%
-     mutate(density_gap = log(abs(density_gap)))) %>%
-  summary()
+     mutate(density_gap = log(abs(density_gap))))
+
+summary(mod_linear)
 
 ## preparing the data
 set.seed(42)
@@ -106,6 +108,15 @@ split <-
 # create separate datasets
 train <- training(split)
 test <- testing(split)
+
+# look at the dependent variable for each
+bind_rows(mutate(train, split = "train"),
+          mutate(test, split = "test")) %>%
+  ggplot(aes(exp(density_gap), fill = split)) +
+  geom_histogram() +
+  scale_x_log10() +
+  facet_wrap(~ split) +
+  theme_minimal()
 
 # rescale continous variables
 continuous <- c("geometry_count_perha", "area_mean", "isoperi_mean", "orientation_order", "ndvi_mean", "density_gap", "hhi_med", "pct_white", "popden", "dist_popcen", "dist_station_cat", "pct_unit_recent10", "res_acres", "hu_acres_2019", "avgage")
@@ -256,13 +267,6 @@ results_rf <-
   fflow_rf %>%
   last_fit(split)
 
-collect_metrics(results_boost) %>%
-  bind_rows(collect_metrics(results_rf)) %>% 
-  filter(.metric == "rmse") %>% 
-  mutate(model = c("bag", "rf", "boost")) %>% 
-  select(model, everything()) %>% 
-  knitr::kable()
-
 # collect final metrics
 results_boost %>%
   collect_predictions() %>%
@@ -271,11 +275,17 @@ results_boost %>%
   ggplot(aes(exp(density_gap), exp(.pred), colour = error)) + 
   geom_point(alpha = 0.5) +
   scale_x_log10() +
-  scale_y_log10() +
-  scico::scale_colour_scico(palette = 'hawaii', breaks = c(5, 10, 15), limits = c(0, 20), oob = scales::squish) +
-  ggtitle("XGBOOST") + 
+  scale_y_log10(breaks = c(0.3, 1.0, 3.0, 10),
+                limits = c(NA, 20)) +
+  scale_colour_gradientn(colours = RColorBrewer::brewer.pal(n = 9, name = 'OrRd'), 
+                         breaks = c(5, 10, 15), limits = c(0, 20), oob = scales::squish) +
+  labs(title = "XGBoost (in sample)",
+       x = "density gap",
+       y = "prediction") + 
   theme_minimal() +
   ggsave("boost.png", height = 6, width = 8, dpi = 300)
+
+?scale_y_log10
 
 results_rf %>%
   collect_predictions() %>%
@@ -284,13 +294,17 @@ results_rf %>%
   ggplot(aes(exp(density_gap), exp(.pred), colour = error)) + 
   geom_point(alpha = 0.5) +
   scale_x_log10() +
-  scale_y_log10() +
-  scico::scale_colour_scico(palette = 'hawaii', breaks = c(5, 10, 15), limits = c(0, 20), oob = scales::squish) +
-  ggtitle("RF") + 
+  scale_y_log10(breaks = c(0.3, 1.0, 3.0, 10),
+                limits = c(NA, 20)) +
+  scale_colour_gradientn(colours = RColorBrewer::brewer.pal(n = 9, name = 'OrRd'), 
+                       breaks = c(5, 10, 15), limits = c(0, 20), oob = scales::squish) +
+  labs(title = "Random Forest (in sample)",
+       x = "density gap",
+       y = "prediction") + 
   theme_minimal() +
   ggsave("rf.png", height = 6, width = 8, dpi = 300)
 
-## the MAE is the same for both models (?)
+## the MAE is the same (1.77 and 1.78)  for both models
 results_boost %>%
   collect_predictions() %>%
   mutate(error = exp(abs(density_gap - .pred))) %>%
@@ -322,6 +336,7 @@ holdout_fit <-
   final_rf %>%
   set_engine("ranger") %>%
   fit(density_gap ~ .,
+      # this is the original data
       data = prediction_juice
   )
 
@@ -331,9 +346,86 @@ vector_variables %>%
   drop_na() %>%
   transmute(GEOID, 
             density_gap = log(abs(density_gap)),
+            # this is the county we held out
             prediction = predict(holdout_fit, holdout_juice)$.pred) %>%
   filter(str_sub(GEOID, 1, 5) == holdout) %>%
   summarise(MAE = mean(abs(density_gap - prediction)),
             n = n()) %>% 
   mutate(MAE = exp(MAE))
+
+test_juice <- 
+  recipe(density_gap ~ ., 
+       data = test) %>%
+  step_scale(all_of(continuous)) %>% 
+  prep() %>% 
+  juice()
+
+# out of sample is way worse with a MAE of 5.83 across 1865 block groups
+predict(holdout_fit, test_juice) %>%
+  mutate(density_gap = test$density_gap,
+         error = exp(abs(density_gap - .pred))) %>% 
+  summarise(MAE = mean(error),
+            n = n())
+
+options(scipen = 999)
+
+predict(holdout_fit, test_juice) %>%
+  mutate(density_gap = test$density_gap,
+         error = abs(density_gap - .pred)) %>%
+  mutate(error = exp(abs(density_gap - .pred))) %>% 
+  ggplot(aes(exp(density_gap), exp(.pred), colour = error)) + 
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scico::scale_colour_scico(palette = 'hawaii', breaks = c(5, 10, 15), limits = c(0, 20), oob = scales::squish) +
+  ggtitle("RF (out of sample)") + 
+  theme_minimal() +
+  ggsave("rf_out.png", height = 6, width = 8, dpi = 300)
+
+## comparison with linear model
+mod_linear <-
+  linear_reg() %>%
+  set_mode("regression") %>% 
+  set_engine("lm")
+
+fit_linear <- 
+  mod_linear %>%
+  fit(density_gap ~ .,
+      data = prediction_juice
+  )
+
+# MAE is 6.19 for a linear model
+fit_linear %>%
+  predict(new_data = test_juice) %>% 
+  mutate(density_gap = test$density_gap) %>%
+  filter(density_gap != 0) %>%
+  mutate(error = exp(abs(density_gap - .pred))) %>% 
+  summarise(MAE = mean(error))
+
+# compare 
+bind_rows(
+  fit_linear %>%
+    predict(new_data = test_juice) %>% 
+    mutate(density_gap = test$density_gap) %>%
+    transmute(error = exp(abs(density_gap - .pred)),
+              .pred,
+              density_gap,
+              model = "linear"),
+  predict(holdout_fit, test_juice) %>%
+    mutate(density_gap = test$density_gap,
+           error = abs(density_gap - .pred)) %>%
+    mutate(error = exp(abs(density_gap - .pred)),
+           .pred,
+           density_gap,
+           model = "random forest")) %>%
+  ggplot(aes(exp(density_gap), exp(.pred), colour = model)) + 
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  scale_y_log10() + 
+  scale_color_brewer(palette = 'Set1') +
+  labs(title = "Comparison between Linear Model and Random Forest (out of sample)",
+       x = "density gap",
+       y = "prediction") + 
+  theme_minimal() +
+  ggsave("comparison.png", height = 6, width = 8, dpi = 300)
 
