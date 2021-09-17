@@ -1,4 +1,4 @@
-## Mapping all protected areas
+## Plotting all protected areas
 
 # packages
 library(sf)
