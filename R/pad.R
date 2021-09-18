@@ -9,6 +9,16 @@ library(tidyverse)
 pad <- st_read("data/PADUS2_1_Geopackage/PADUS2_1_Geopackage.gpkg", 
                layer = "PADUS2_1Combined_Fee_Designation_Easement")
 
+# map it
+tmap_save(
+  pad %>% 
+    st_transform(2163) %>%
+    tm_shape() +
+    tm_lines(col = "#000000", lty = 0.001) +
+    tm_layout(frame = FALSE),
+  filename = "protected_lines.png", height = 20, dpi = 300)
+
+# aggregate it
 states <- 
   states(cb = TRUE, class = 'sf') %>%
   mutate(state_area = units::set_units(st_area(geometry), ha))
@@ -21,6 +31,7 @@ centroid <-
 
 # joining
 joined <- st_join(st_transform(states, 2163), st_transform(centroid, 2163))
+difference <- st_difference(st_transform(states, 2163), st_transform(st_combine(st_union(pad)), 2163))
 
 # filtering  
 contiguous <- unique(tigris::fips_codes$state)[1:51][-c(2, 12)]
