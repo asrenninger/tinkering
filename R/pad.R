@@ -4,25 +4,39 @@
 library(sf)
 library(tmap)
 library(tidyverse)
+library(tigris)
 
 # data
 pad <- st_read("data/PADUS2_1_Geopackage/PADUS2_1_Geopackage.gpkg", 
                layer = "PADUS2_1Combined_Fee_Designation_Easement")
 
+# filtering  
+contiguous <- unique(tigris::fips_codes$state)[1:51][-c(2, 12)]
+
+states <- 
+  states(cb = TRUE, class = 'sf') %>%
+  mutate(state_area = units::set_units(st_area(geometry), ha)) %>%
+  filter(STUSPS %in% contiguous) %>%
+  st_transform(2163)
+
 # map it
 tmap_save(
   pad %>% 
+    rownames_to_column(var = "id") %>% 
+    select(id) %>%
     st_transform(2163) %>%
+    st_join(states) %>% 
+    drop_na(GEOID) %>%
+    group_by(id) %>% 
+    slice(1) %>% 
+    ungroup() %>% 
+    st_geometry() %>%
     tm_shape() +
-    tm_lines(col = "#000000", lty = 0.001) +
+    tm_polygons(col = "#000000", fill = NA, lwd = 0.0001) +
     tm_layout(frame = FALSE),
-  filename = "protected_lines.png", height = 20, dpi = 300)
+  filename = "protected_lines.png", height = 20, units = "in", dpi = 300)
 
 # aggregate it
-states <- 
-  states(cb = TRUE, class = 'sf') %>%
-  mutate(state_area = units::set_units(st_area(geometry), ha))
-
 centroid <- 
   pad %>% 
   transmute(protected_area = units::set_units(st_area(SHAPE), ha)) %>% 
@@ -32,9 +46,6 @@ centroid <-
 # joining
 joined <- st_join(st_transform(states, 2163), st_transform(centroid, 2163))
 difference <- st_difference(st_transform(states, 2163), st_transform(st_combine(st_union(pad)), 2163))
-
-# filtering  
-contiguous <- unique(tigris::fips_codes$state)[1:51][-c(2, 12)]
 
 # plotting
 tmap_save(
