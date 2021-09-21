@@ -429,3 +429,22 @@ bind_rows(
   theme_minimal() +
   ggsave("comparison.png", height = 6, width = 8, dpi = 300)
 
+###################################################
+
+tmap_mode("plot")
+
+tmap_save(
+  blocks %>% 
+    left_join(area_landcover) %>% 
+    transmute(`development change` = rescale(development_change, to = c(0, 10))) %>%
+    tm_shape() + 
+    tm_fill(col = "development change", style = "fisher", pal = RColorBrewer::brewer.pal(n = 9, name = 'OrRd')),
+  filename = "landcover.png", height = 6, dpi = 300)
+
+tmap_save(
+  blocks %>% 
+  left_join(area_landcover) %>% 
+  transmute(`impervious change` = rescale(impervious_change, to = c(0, 10))) %>%
+  tm_shape() + 
+  tm_fill(col = "impervious change", style = "fisher", pal = RColorBrewer::brewer.pal(n = 9, name = 'PuBu')),
+  filename = "impervious.png", height = 6, dpi = 300)
