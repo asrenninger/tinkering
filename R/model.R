@@ -429,7 +429,9 @@ bind_rows(
   theme_minimal() +
   ggsave("comparison.png", height = 6, width = 8, dpi = 300)
 
-###################################################
+###############################
+## plotting 
+###############################
 
 tmap_mode("plot")
 
