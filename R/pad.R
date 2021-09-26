@@ -7,8 +7,10 @@ library(tidyverse)
 library(tigris)
 
 # data
-pad <- st_read("data/PADUS2_1_Geopackage/PADUS2_1_Geopackage.gpkg", 
-               layer = "PADUS2_1Combined_Fee_Designation_Easement")
+pad <- 
+  st_read("~/Downloads/PADUS2_1_Geopackage/PADUS2_1_Geopackage.gpkg", 
+          layer = "PADUS2_1Combined_Fee_Designation_Easement") %>%
+  st_transform(2163)
 
 # filtering  
 contiguous <- unique(tigris::fips_codes$state)[1:51][-c(2, 12)]
@@ -66,3 +68,41 @@ tmap_save(
     tm_borders(col = "#000000", lty = 2) +
     tm_layout(frame = FALSE),
   filename = "protected_areas.png", height = 8, dpi = 300)
+
+## 
+fl <- 
+  states %>% 
+  filter(STUSPS == "FL") %>% 
+  st_union() %>% 
+  st_combine()
+
+plot(fl)
+
+pad_fl <- st_intersection(st_transform(pad, 2163), fl)
+
+# map it
+tmap_save(
+  pad_fl %>% 
+    group_by(Source_PAID) %>% 
+    slice(1) %>% 
+    ungroup() %>% 
+    st_geometry() %>%
+    tm_shape() +
+    tm_fill(col = "#000000") +
+    tm_shape(counties(cb = TRUE, class = 'sf') %>% 
+               filter(STATEFP == "12")) +
+    tm_borders(col = '#c7c7c7', lwd = 1, lty = 2) + 
+    tm_layout(frame = FALSE),
+  filename = "protected_fl.png", height = 20, units = "in", dpi = 300)
+
+## all together now
+blades <- states %>% group_by(STUSPS) %>% group_split() %>% map(~st_combine(st_union(.x)))
+
+state_areas <- 
+  reduce(map(blades,
+             function(blade){
+               return(st_combine(st_union(st_intersection(pad, blade))))
+             }
+             
+  ), 
+  rbind)
