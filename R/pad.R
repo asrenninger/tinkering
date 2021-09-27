@@ -69,31 +69,71 @@ tmap_save(
     tm_layout(frame = FALSE),
   filename = "protected_areas.png", height = 8, dpi = 300)
 
-## 
+## fl
 fl <- 
   states %>% 
   filter(STUSPS == "FL") %>% 
   st_union() %>% 
   st_combine()
 
-plot(fl)
-
-pad_fl <- st_intersection(st_transform(pad, 2163), fl)
+pad_fl <- st_intersection(pad, fl)
 
 # map it
 tmap_save(
   pad_fl %>% 
-    group_by(Source_PAID) %>% 
-    slice(1) %>% 
-    ungroup() %>% 
+    st_transform(3857) %>% 
     st_geometry() %>%
     tm_shape() +
     tm_fill(col = "#000000") +
     tm_shape(counties(cb = TRUE, class = 'sf') %>% 
-               filter(STATEFP == "12")) +
-    tm_borders(col = '#c7c7c7', lwd = 1, lty = 2) + 
+               filter(STATEFP == "12") %>% 
+               st_transform(3857)) +
+    tm_borders(col = '#4a4a4a', lwd = 2, lty = 3) + 
     tm_layout(frame = FALSE),
-  filename = "protected_fl.png", height = 20, units = "in", dpi = 300)
+  filename = "protected_fl_redux.png", height = 10, units = "in", dpi = 300)
+
+# md
+md <- 
+  states %>% 
+  filter(STUSPS == "MD") %>% 
+  st_union() %>% 
+  st_combine()
+
+pad_md <- st_intersection(pad, md)
+
+# map it
+tmap_save(
+  pad_md %>% 
+    st_geometry() %>%
+    tm_shape() +
+    tm_fill(col = "#000000") +
+    tm_shape(counties(cb = TRUE, class = 'sf') %>% 
+               filter(STATEFP == "24")) +
+    tm_borders(col = '#4a4a4a', lwd = 2, lty = 3) + 
+    tm_layout(frame = FALSE),
+  filename = "protected_md_redux.png", height = 10, units = "in", dpi = 300)
+
+# nj
+nj <- 
+  states %>% 
+  filter(STUSPS == "NJ") %>% 
+  st_union() %>% 
+  st_combine() %>%
+  st_transform(3857)
+
+pad_nj <- st_intersection(st_transform(pad, 3857), nj)
+
+# map it
+tmap_save(
+  pad_nj %>% 
+    st_geometry() %>%
+    tm_shape() +
+    tm_fill(col = "#000000") +
+    tm_shape(counties(cb = TRUE, class = 'sf') %>% 
+               filter(STATEFP == "34")) +
+    tm_borders(col = '#4a4a4a', lwd = 2, lty = 3) + 
+    tm_layout(frame = FALSE),
+  filename = "protected_nj_redux.png", height = 10, units = "in", dpi = 300)
 
 ## all together now
 blades <- states %>% group_by(STUSPS) %>% group_split() %>% map(~st_combine(st_union(.x)))
@@ -106,3 +146,28 @@ state_areas <-
              
   ), 
   rbind)
+
+counties_fl <- 
+  tigris::fips_codes %>% 
+  filter(state == "FL") %>% 
+  pull(county) %>% 
+  str_remove_all(" County")
+
+download.file(url = "http://ww10.doh.state.fl.us/pub/bos/Inventory/FloridaWaterManagementInventory/MiamiDade/miamidade-public.zip",
+              destfile = "florida/Desoto.zip")
+
+purrr::map(counties_fl[60:length(counties_fl)], 
+           function(x) {
+             download.file(url = glue::glue("http://ww10.doh.state.fl.us/pub/bos/Inventory/FloridaWaterManagementInventory/{x}/{str_to_lower(str_remove_all(x, pattern = ' '))}-public.zip"),
+                           destfile = glue::glue("florida/{x}.zip"))}
+)
+
+purrr::map(fs::dir_ls("florida"), ~unzip(.x, exdir = "florida/extracted"))
+
+parcels <- reduce(purrr::map(fs::dir_ls("florida/extracted", recurse = TRUE, regexp = ".shp$")[1:3], function(x) {
+  st_read(x) %>%
+    select(WW)}), rbind)
+
+parcels %>% drop_na(WW) %>% plot()
+
+
