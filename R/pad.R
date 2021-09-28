@@ -9,8 +9,7 @@ library(tigris)
 # data
 pad <- 
   st_read("~/Downloads/PADUS2_1_Geopackage/PADUS2_1_Geopackage.gpkg", 
-          layer = "PADUS2_1Combined_Fee_Designation_Easement") %>%
-  st_transform(2163)
+          layer = "PADUS2_1Combined_Fee_Designation_Easement")
 
 # filtering  
 contiguous <- unique(tigris::fips_codes$state)[1:51][-c(2, 12)]
@@ -21,12 +20,16 @@ states <-
   filter(STUSPS %in% contiguous) %>%
   st_transform(2163)
 
+counties <- 
+  counties(cb = TRUE, class = 'sf') %>% 
+  st_transform(3857)
+
 # map it
 tmap_save(
   pad %>% 
+    st_transform(2163) %>% 
     rownames_to_column(var = "id") %>% 
     select(id) %>%
-    st_transform(2163) %>%
     st_join(states) %>% 
     drop_na(GEOID) %>%
     group_by(id) %>% 
@@ -76,7 +79,7 @@ fl <-
   st_union() %>% 
   st_combine()
 
-pad_fl <- st_intersection(pad, fl)
+pad_fl <- st_intersection(st_transform(pad, 2163), fl)
 
 # map it
 tmap_save(
@@ -85,9 +88,8 @@ tmap_save(
     st_geometry() %>%
     tm_shape() +
     tm_fill(col = "#000000") +
-    tm_shape(counties(cb = TRUE, class = 'sf') %>% 
-               filter(STATEFP == "12") %>% 
-               st_transform(3857)) +
+    tm_shape(counties %>% 
+               filter(STATEFP == "12")) +
     tm_borders(col = '#4a4a4a', lwd = 2, lty = 3) + 
     tm_layout(frame = FALSE),
   filename = "protected_fl_redux.png", height = 10, units = "in", dpi = 300)
@@ -99,37 +101,38 @@ md <-
   st_union() %>% 
   st_combine()
 
-pad_md <- st_intersection(pad, md)
+pad_md <- st_intersection(st_transform(pad, 2163), md)
 
 # map it
 tmap_save(
   pad_md %>% 
+    st_transform(3857) %>% 
     st_geometry() %>%
     tm_shape() +
     tm_fill(col = "#000000") +
-    tm_shape(counties(cb = TRUE, class = 'sf') %>% 
+    tm_shape(counties %>% 
                filter(STATEFP == "24")) +
     tm_borders(col = '#4a4a4a', lwd = 2, lty = 3) + 
     tm_layout(frame = FALSE),
-  filename = "protected_md_redux.png", height = 10, units = "in", dpi = 300)
+  filename = "protected_md_redux.png", height = 5, units = "in", dpi = 300)
 
 # nj
 nj <- 
   states %>% 
   filter(STUSPS == "NJ") %>% 
   st_union() %>% 
-  st_combine() %>%
-  st_transform(3857)
+  st_combine()
 
-pad_nj <- st_intersection(st_transform(pad, 3857), nj)
+pad_nj <- st_intersection(st_transform(pad, 2163), nj)
 
 # map it
 tmap_save(
   pad_nj %>% 
+    st_transform(3857) %>% 
     st_geometry() %>%
     tm_shape() +
     tm_fill(col = "#000000") +
-    tm_shape(counties(cb = TRUE, class = 'sf') %>% 
+    tm_shape(counties %>% 
                filter(STATEFP == "34")) +
     tm_borders(col = '#4a4a4a', lwd = 2, lty = 3) + 
     tm_layout(frame = FALSE),
