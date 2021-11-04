@@ -32,7 +32,7 @@ grid <-
   britain %>%
   st_union() %>%
   st_combine() %>%
-  st_make_grid(cellsize = 5000) %>%
+  st_make_grid(cellsize = 5000, square = FALSE) %>%
   st_as_sf() %>% 
   rownames_to_column(var = "id") %>%
   rename(geometry = x) 
