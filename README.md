@@ -48,3 +48,6 @@ This folder collects a number of quick-and-dirty projects that were too trivial 
 <p align="center">
   <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/rallies.gif" alt=""/>
 </p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/asrenninger/tinkering/master/viz/fractal_dimension.gif" alt=""/>
+</p>
