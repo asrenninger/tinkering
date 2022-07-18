@@ -14,8 +14,7 @@ times <- map(unique(tigris::fips_codes$state)[1:51],
              ~lehdr::grab_lodes(state = .x, year = 2015, lodes_type = 'od', job_type = 'JT00', segment = 'S000', agg_geo = 'BG', 
                                 state_part = "aux", 
                                 download_dir = "~/Desktop/R/git/networks/data/lodes/",
-                                use_cache = TRUE)
-             })
+                                use_cache = TRUE))
 
 ## load
 lodes <- map_dfr(fs::dir_ls("~/Desktop/R/git/networks/data/lodes/"), 
