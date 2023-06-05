@@ -72,7 +72,7 @@ dow <-
         panel.grid.minor.y = element_blank(),
         panel.grid.major.y = element_blank())
 
-dow
+ggsave(plot = dow, filename = "dow.png", height = 8, width = 6, dpi = 300)
 
 links <- map_chr(elem[1], ~html_attr(.x, name = "href"))
 
